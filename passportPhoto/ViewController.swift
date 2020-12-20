@@ -8,11 +8,15 @@
 
 import UIKit
 
-class ViewController: UIViewController {
+class ImportController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view.
+        if let tabBarArray = tabBarController?.tabBar.items {
+            for i in 1..<tabBarArray.count {
+                tabBarArray[i].isEnabled = false
+            }
+        }
     }
 
 
