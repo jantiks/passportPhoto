@@ -8,7 +8,7 @@
 
 import UIKit
 
-class ImportController: UIViewController {
+class ImportController: UIViewController, UIImagePickerControllerDelegate {
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -19,6 +19,10 @@ class ImportController: UIViewController {
         }
     }
 
-
+    @IBAction func galleryTapped(_ sender: Any) {
+    }
+    @IBAction func cameraTapped(_ sender: Any) {
+    }
+    
 }
 
