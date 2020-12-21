@@ -185,6 +185,9 @@
                                 <state key="normal" title="Download">
                                     <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 </state>
+                                <connections>
+                                    <action selector="downloadTapped:" destination="aog-Nv-cf3" eventType="touchUpInside" id="p8D-lc-Yln"/>
+                                </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gfj-mJ-wN9">
                                 <rect key="frame" x="234" y="742" width="160" height="42"/>
@@ -196,6 +199,9 @@
                                 <state key="normal" title="Crop Again">
                                     <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 </state>
+                                <connections>
+                                    <action selector="cropAgainTapped:" destination="aog-Nv-cf3" eventType="touchUpInside" id="xMf-qN-JDk"/>
+                                </connections>
                             </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -216,6 +222,7 @@
                     </view>
                     <tabBarItem key="tabBarItem" tag="1" title="Export" image="square.and.arrow.up" catalog="system" id="RVO-WA-BxG"/>
                     <connections>
+                        <outlet property="downloadButton" destination="8Vd-QX-Q06" id="Uwn-Xo-62j"/>
                         <outlet property="imageView" destination="m82-jw-dS7" id="7sH-Fy-k5n"/>
                     </connections>
                 </viewController>
