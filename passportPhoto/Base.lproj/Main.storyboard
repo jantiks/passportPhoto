@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="16097.3" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="yth-bG-KFz">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="16097.3" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="4WS-fy-C1N">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16087"/>
@@ -7,7 +7,7 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--Import-->
+        <!--Item-->
         <scene sceneID="tne-QT-ifu">
             <objects>
                 <viewController id="BYZ-38-t0r" customClass="ImportController" customModule="passportPhoto" customModuleProvider="target" sceneMemberID="viewController">
@@ -134,27 +134,12 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
-                    <tabBarItem key="tabBarItem" title="Import" image="square.and.arrow.down" catalog="system" id="9fu-A0-LKN"/>
+                    <tabBarItem key="tabBarItem" title="Item" image="square.and.arrow.down" catalog="system" id="fz2-Eu-6Yk"/>
+                    <navigationItem key="navigationItem" id="bWy-au-Dg7"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-949.27536231884062" y="841.74107142857144"/>
-        </scene>
-        <!--Crop-->
-        <scene sceneID="X2K-Vi-vah">
-            <objects>
-                <viewController id="Nz0-6s-lj1" customClass="CropController" customModule="passportPhoto" customModuleProvider="target" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="QPQ-7D-Urk">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                        <viewLayoutGuide key="safeArea" id="Lf4-fy-djm"/>
-                    </view>
-                    <tabBarItem key="tabBarItem" tag="1" title="Crop" image="crop" catalog="system" id="yMm-TV-6IG"/>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="cx6-gv-7Ah" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="138" y="842"/>
+            <point key="canvasLocation" x="871.01449275362324" y="841.74107142857144"/>
         </scene>
         <!--Export-->
         <scene sceneID="vht-jM-agT">
@@ -166,34 +151,32 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <viewLayoutGuide key="safeArea" id="QJL-4y-hYY"/>
                     </view>
-                    <tabBarItem key="tabBarItem" tag="2" title="Export" image="square.and.arrow.up" catalog="system" id="RVO-WA-BxG"/>
+                    <tabBarItem key="tabBarItem" tag="1" title="Export" image="square.and.arrow.up" catalog="system" id="RVO-WA-BxG"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="vOt-KC-RcY" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1188" y="842"/>
+            <point key="canvasLocation" x="2345" y="842"/>
         </scene>
         <!--Tab Bar Controller-->
-        <scene sceneID="nHm-6S-jP2">
+        <scene sceneID="dRp-Af-MRJ">
             <objects>
-                <tabBarController automaticallyAdjustsScrollViewInsets="NO" id="yth-bG-KFz" sceneMemberID="viewController">
+                <tabBarController automaticallyAdjustsScrollViewInsets="NO" id="4WS-fy-C1N" sceneMemberID="viewController">
                     <toolbarItems/>
-                    <tabBar key="tabBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="hRI-WG-J4Y">
+                    <tabBar key="tabBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="hXu-XF-Tj6">
                         <autoresizingMask key="autoresizingMask"/>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     </tabBar>
                     <connections>
-                        <segue destination="BYZ-38-t0r" kind="relationship" relationship="viewControllers" id="wPJ-cB-mbH"/>
-                        <segue destination="Nz0-6s-lj1" kind="relationship" relationship="viewControllers" id="UtN-a1-Uom"/>
-                        <segue destination="aog-Nv-cf3" kind="relationship" relationship="viewControllers" id="5Cm-MI-uC6"/>
+                        <segue destination="BYZ-38-t0r" kind="relationship" relationship="viewControllers" id="h6M-XN-AdL"/>
+                        <segue destination="aog-Nv-cf3" kind="relationship" relationship="viewControllers" id="N2m-dF-RWl"/>
                     </connections>
                 </tabBarController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="5YO-BJ-YdQ" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Iwn-su-cAt" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="137.68115942028987" y="112.5"/>
+            <point key="canvasLocation" x="1642" y="-35"/>
         </scene>
     </scenes>
     <resources>
-        <image name="crop" catalog="system" width="128" height="122"/>
         <image name="photo-camera" width="512" height="512"/>
         <image name="photo-gallery" width="512" height="512"/>
         <image name="square.and.arrow.down" catalog="system" width="121" height="128"/>

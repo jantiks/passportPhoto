@@ -7,8 +7,11 @@
 //
 
 import UIKit
+import CropViewController
+import TOCropViewController
 
-class ImportController: UIViewController, UIImagePickerControllerDelegate {
+class ImportController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate,CropViewControllerDelegate {
+    var currentImage: UIImage?
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -18,11 +21,46 @@ class ImportController: UIViewController, UIImagePickerControllerDelegate {
             }
         }
     }
+    
+    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
+        guard let image = info[.originalImage] as? UIImage else { return }
+        
+        currentImage = image
+        
+        
+        
+        dismiss(animated: true)
+        
+        if let image = currentImage {
+            print("passed")
+            let cropController = CropViewController(croppingStyle: .default, image: image)
+            cropController.delegate = self
+            present(cropController, animated: true)
+        }
+        
+    }
+    
+    func cropViewController(_ cropViewController: CropViewController, didCropToImage image: UIImage, withRect cropRect: CGRect, angle: Int) {
+        <#code#>
+    }
 
     @IBAction func galleryTapped(_ sender: Any) {
+        let picker = UIImagePickerController()
+        picker.delegate = self
+        present(picker, animated: true)
     }
     @IBAction func cameraTapped(_ sender: Any) {
+        let picker = UIImagePickerController()
+        picker.delegate = self
+        if UIImagePickerController.isSourceTypeAvailable(.camera) {
+            picker.sourceType = .camera
+            present(picker, animated: true)
+            
+        }
+        
+        
     }
+
     
 }
 

@@ -7,14 +7,28 @@
 //
 
 import UIKit
+import CropViewController
+import TOCropViewController
 
-class CropController: UIViewController {
+class CropController: UIViewController, CropViewControllerDelegate {
 
+    var croppingImage: UIImage?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        view.backgroundColor = .brown
+        
+        if let image = croppingImage {
+            print("passed")
+            let cropController = CropViewController(croppingStyle: .default, image: image)
+            cropController.delegate = self
+            present(cropController, animated: true)
+        }
+        
+          
     }
+    
+
     
 
     /*
