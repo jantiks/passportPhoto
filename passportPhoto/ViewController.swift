@@ -16,9 +16,8 @@ class ImportController: UIViewController, UIImagePickerControllerDelegate, UINav
     override func viewDidLoad() {
         super.viewDidLoad()
         if let tabBarArray = tabBarController?.tabBar.items {
-            for i in 1..<tabBarArray.count {
-                tabBarArray[i].isEnabled = false
-            }
+                tabBarArray[1].isEnabled = false
+            
         }
     }
     

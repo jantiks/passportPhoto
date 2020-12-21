@@ -222,6 +222,7 @@
                     </view>
                     <tabBarItem key="tabBarItem" tag="1" title="Export" image="square.and.arrow.up" catalog="system" id="RVO-WA-BxG"/>
                     <connections>
+                        <outlet property="cropAgainButton" destination="gfj-mJ-wN9" id="yzH-bD-hLr"/>
                         <outlet property="downloadButton" destination="8Vd-QX-Q06" id="Uwn-Xo-62j"/>
                         <outlet property="imageView" destination="m82-jw-dS7" id="7sH-Fy-k5n"/>
                     </connections>
