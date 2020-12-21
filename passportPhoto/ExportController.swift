@@ -10,10 +10,24 @@ import UIKit
 
 class ExportController: UIViewController {
 
+    var croppedImage: UIImage?
+    
+    
+    @IBOutlet var imageView: UIImageView!
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        view.backgroundColor = .green
+//        if let image = croppedImage {
+//            imageView.image = image
+//        }
+        
+    
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        if let image = croppedImage {
+            imageView.image = image
+        }
     }
     
 

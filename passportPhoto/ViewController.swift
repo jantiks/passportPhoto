@@ -41,7 +41,16 @@ class ImportController: UIViewController, UIImagePickerControllerDelegate, UINav
     }
     
     func cropViewController(_ cropViewController: CropViewController, didCropToImage image: UIImage, withRect cropRect: CGRect, angle: Int) {
-        <#code#>
+        dismiss(animated: true)
+        let croppedImage = image
+        tabBarController?.viewControllers?.forEach({
+            if let controller = $0 as? ExportController {
+                controller.croppedImage = croppedImage
+                tabBarController?.tabBar.items?[1].isEnabled = true
+                tabBarController?.selectedIndex = 1
+            }
+        })
+        
     }
 
     @IBAction func galleryTapped(_ sender: Any) {
