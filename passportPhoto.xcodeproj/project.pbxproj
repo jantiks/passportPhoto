@@ -7,17 +7,18 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		981E9CA6259278B5005FA88D /* Mantis in Frameworks */ = {isa = PBXBuildFile; productRef = 981E9CA5259278B5005FA88D /* Mantis */; };
 		98261552258FBBD200100168 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98261551258FBBD200100168 /* AppDelegate.swift */; };
 		98261554258FBBD200100168 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98261553258FBBD200100168 /* SceneDelegate.swift */; };
 		98261556258FBBD200100168 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98261555258FBBD200100168 /* ViewController.swift */; };
 		98261559258FBBD200100168 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 98261557258FBBD200100168 /* Main.storyboard */; };
 		9826155B258FBBD500100168 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9826155A258FBBD500100168 /* Assets.xcassets */; };
 		9826155E258FBBD500100168 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9826155C258FBBD500100168 /* LaunchScreen.storyboard */; };
-		985DEF472592128B00150BF8 /* Mantis in Frameworks */ = {isa = PBXBuildFile; productRef = 985DEF462592128B00150BF8 /* Mantis */; };
 		986C737F258FD41C003D97D9 /* ExportController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 986C737E258FD41C003D97D9 /* ExportController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		981E9CA32592789F005FA88D /* Mantis-master-2 */ = {isa = PBXFileReference; lastKnownFileType = folder; name = "Mantis-master-2"; path = "../../../Downloads/Mantis-master-2"; sourceTree = "<group>"; };
 		9826154E258FBBD200100168 /* passportPhoto.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = passportPhoto.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		98261551258FBBD200100168 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		98261553258FBBD200100168 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -34,18 +35,27 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				985DEF472592128B00150BF8 /* Mantis in Frameworks */,
+				981E9CA6259278B5005FA88D /* Mantis in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		981E9CA4259278B5005FA88D /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		98261545258FBBD200100168 = {
 			isa = PBXGroup;
 			children = (
+				981E9CA32592789F005FA88D /* Mantis-master-2 */,
 				98261550258FBBD200100168 /* passportPhoto */,
 				9826154F258FBBD200100168 /* Products */,
+				981E9CA4259278B5005FA88D /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -89,7 +99,7 @@
 			);
 			name = passportPhoto;
 			packageProductDependencies = (
-				985DEF462592128B00150BF8 /* Mantis */,
+				981E9CA5259278B5005FA88D /* Mantis */,
 			);
 			productName = passportPhoto;
 			productReference = 9826154E258FBBD200100168 /* passportPhoto.app */;
@@ -117,10 +127,21 @@
 			knownRegions = (
 				en,
 				Base,
+				"zh-Hans",
+				de,
+				ar,
+				ja,
+				es,
+				it,
+				"ko-KR",
+				ko,
+				"zh-Hant",
+				ru,
+				fr,
+				"pt-PT",
 			);
 			mainGroup = 98261545258FBBD200100168;
 			packageReferences = (
-				985DEF452592128B00150BF8 /* XCRemoteSwiftPackageReference "Mantis" */,
 			);
 			productRefGroup = 9826154F258FBBD200100168 /* Products */;
 			projectDirPath = "";
@@ -349,21 +370,9 @@
 		};
 /* End XCConfigurationList section */
 
-/* Begin XCRemoteSwiftPackageReference section */
-		985DEF452592128B00150BF8 /* XCRemoteSwiftPackageReference "Mantis" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/guoyingtao/Mantis";
-			requirement = {
-				kind = upToNextMajorVersion;
-				minimumVersion = 1.4.7;
-			};
-		};
-/* End XCRemoteSwiftPackageReference section */
-
 /* Begin XCSwiftPackageProductDependency section */
-		985DEF462592128B00150BF8 /* Mantis */ = {
+		981E9CA5259278B5005FA88D /* Mantis */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = 985DEF452592128B00150BF8 /* XCRemoteSwiftPackageReference "Mantis" */;
 			productName = Mantis;
 		};
 /* End XCSwiftPackageProductDependency section */

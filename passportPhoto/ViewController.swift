@@ -58,10 +58,6 @@ class ImportController: UIViewController, UIImagePickerControllerDelegate, UINav
         
     }
     
-    func cropViewController(_ cropViewController: CropViewController, didCropToImage image: UIImage, withRect cropRect: CGRect, angle: Int) {
-        
-        
-    }
 
     @IBAction func galleryTapped(_ sender: Any) {
         let picker = UIImagePickerController()
