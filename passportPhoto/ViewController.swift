@@ -7,10 +7,26 @@
 //
 
 import UIKit
-import CropViewController
-import TOCropViewController
+import Mantis
 
 class ImportController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate,CropViewControllerDelegate {
+    func cropViewControllerDidCrop(_ cropViewController: CropViewController, cropped: UIImage, transformation: Transformation) {
+        
+        dismiss(animated: true)
+        let croppedImage = cropped
+        tabBarController?.viewControllers?.forEach({
+            if let controller = $0 as? ExportController {
+                controller.croppedImage = croppedImage
+                tabBarController?.tabBar.items?[1].isEnabled = true
+                tabBarController?.selectedIndex = 1
+            }
+        })
+    }
+    
+    func cropViewControllerDidCancel(_ cropViewController: CropViewController, original: UIImage) {
+        dismiss(animated: true)
+    }
+    
     var currentImage: UIImage?
 
     override func viewDidLoad() {
@@ -31,24 +47,19 @@ class ImportController: UIViewController, UIImagePickerControllerDelegate, UINav
         dismiss(animated: true)
         
         if let image = currentImage {
-            print("passed")
-            let cropController = CropViewController(croppingStyle: .default, image: image)
+            let cropController = Mantis.cropViewController(image: image)
             cropController.delegate = self
+            
+            var configure = Mantis.Config()
+            configure.addCustomRatio(byHorizontalWidth: 11, andHorizontalHeight: 12)
+            cropController.config = configure
             present(cropController, animated: true)
         }
         
     }
     
     func cropViewController(_ cropViewController: CropViewController, didCropToImage image: UIImage, withRect cropRect: CGRect, angle: Int) {
-        dismiss(animated: true)
-        let croppedImage = image
-        tabBarController?.viewControllers?.forEach({
-            if let controller = $0 as? ExportController {
-                controller.croppedImage = croppedImage
-                tabBarController?.tabBar.items?[1].isEnabled = true
-                tabBarController?.selectedIndex = 1
-            }
-        })
+        
         
     }
 

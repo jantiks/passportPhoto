@@ -13,8 +13,7 @@
 		98261559258FBBD200100168 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 98261557258FBBD200100168 /* Main.storyboard */; };
 		9826155B258FBBD500100168 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9826155A258FBBD500100168 /* Assets.xcassets */; };
 		9826155E258FBBD500100168 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9826155C258FBBD500100168 /* LaunchScreen.storyboard */; };
-		986C7379258FBE08003D97D9 /* CropViewController in Frameworks */ = {isa = PBXBuildFile; productRef = 986C7378258FBE08003D97D9 /* CropViewController */; };
-		986C737B258FBE08003D97D9 /* TOCropViewController in Frameworks */ = {isa = PBXBuildFile; productRef = 986C737A258FBE08003D97D9 /* TOCropViewController */; };
+		985DEF472592128B00150BF8 /* Mantis in Frameworks */ = {isa = PBXBuildFile; productRef = 985DEF462592128B00150BF8 /* Mantis */; };
 		986C737F258FD41C003D97D9 /* ExportController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 986C737E258FD41C003D97D9 /* ExportController.swift */; };
 /* End PBXBuildFile section */
 
@@ -35,8 +34,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				986C737B258FBE08003D97D9 /* TOCropViewController in Frameworks */,
-				986C7379258FBE08003D97D9 /* CropViewController in Frameworks */,
+				985DEF472592128B00150BF8 /* Mantis in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -91,8 +89,7 @@
 			);
 			name = passportPhoto;
 			packageProductDependencies = (
-				986C7378258FBE08003D97D9 /* CropViewController */,
-				986C737A258FBE08003D97D9 /* TOCropViewController */,
+				985DEF462592128B00150BF8 /* Mantis */,
 			);
 			productName = passportPhoto;
 			productReference = 9826154E258FBBD200100168 /* passportPhoto.app */;
@@ -123,7 +120,7 @@
 			);
 			mainGroup = 98261545258FBBD200100168;
 			packageReferences = (
-				986C7377258FBE08003D97D9 /* XCRemoteSwiftPackageReference "TOCropViewController" */,
+				985DEF452592128B00150BF8 /* XCRemoteSwiftPackageReference "Mantis" */,
 			);
 			productRefGroup = 9826154F258FBBD200100168 /* Products */;
 			projectDirPath = "";
@@ -353,26 +350,21 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
-		986C7377258FBE08003D97D9 /* XCRemoteSwiftPackageReference "TOCropViewController" */ = {
+		985DEF452592128B00150BF8 /* XCRemoteSwiftPackageReference "Mantis" */ = {
 			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/TimOliver/TOCropViewController.git";
+			repositoryURL = "https://github.com/guoyingtao/Mantis";
 			requirement = {
 				kind = upToNextMajorVersion;
-				minimumVersion = 2.5.5;
+				minimumVersion = 1.4.7;
 			};
 		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
-		986C7378258FBE08003D97D9 /* CropViewController */ = {
+		985DEF462592128B00150BF8 /* Mantis */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = 986C7377258FBE08003D97D9 /* XCRemoteSwiftPackageReference "TOCropViewController" */;
-			productName = CropViewController;
-		};
-		986C737A258FBE08003D97D9 /* TOCropViewController */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 986C7377258FBE08003D97D9 /* XCRemoteSwiftPackageReference "TOCropViewController" */;
-			productName = TOCropViewController;
+			package = 985DEF452592128B00150BF8 /* XCRemoteSwiftPackageReference "Mantis" */;
+			productName = Mantis;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};
