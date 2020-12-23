@@ -8,6 +8,7 @@
 
 import UIKit
 import Mantis
+import SwiftSoup
 
 class ImportController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate,CropViewControllerDelegate {
     func cropViewControllerDidCrop(_ cropViewController: CropViewController, cropped: UIImage, transformation: Transformation) {
@@ -35,6 +36,33 @@ class ImportController: UIViewController, UIImagePickerControllerDelegate, UINav
                 tabBarArray[1].isEnabled = false
             
         }
+        
+        let myUrlString = "https://makepassportphoto.com/blog/passport-photo-size-measurements/"
+        guard let myUrl = URL(string: myUrlString) else { return }
+        
+        do {
+            let myHtmlString = try String(contentsOf: myUrl, encoding: .utf8)
+            let htmlContent = myHtmlString
+            
+            do {
+                guard let doc = try? SwiftSoup.parse(htmlContent) else { return }
+                guard let elements = try? doc.select("tr").array() else { return }
+                
+                for position in 1..<elements.count {
+                    guard let element = try? elements[position] else { return }
+                    guard let x = try? element.select("td").array() else { return }
+                    print(x[1])
+                    
+                    
+                }
+                
+                
+            }
+            
+        } catch let error {
+            print("Error \(error)")
+        }
+        
     }
     
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
@@ -47,11 +75,12 @@ class ImportController: UIViewController, UIImagePickerControllerDelegate, UINav
         dismiss(animated: true)
         
         if let image = currentImage {
+            
             let cropController = Mantis.cropViewController(image: image)
             cropController.delegate = self
             
             var configure = Mantis.Config()
-            configure.addCustomRatio(byHorizontalWidth: 11, andHorizontalHeight: 12)
+            configure.addCustomRatio(byHorizontalWidth: 2, andHorizontalHeight: 2.5, name: "Vzgo")
             cropController.config = configure
             present(cropController, animated: true)
         }
