@@ -14,6 +14,7 @@ class ImportController: UIViewController, UIImagePickerControllerDelegate, UINav
     
     var currentImage: UIImage?
     var aspecRatios = [(width: Double, height: Double, name: String)]()
+    var countries = [String]()
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -36,21 +37,26 @@ class ImportController: UIViewController, UIImagePickerControllerDelegate, UINav
                 do {
                     guard let doc = try? SwiftSoup.parse(htmlContent) else { return }
                     guard let elements = try? doc.select("tr").array() else { return }
-                    
-                    for position in 1..<elements.count {
+                    for i in 1..<485 {
                         
-                        guard let element = try? elements[position] else { return }
-                        guard let x = try? element.select("td").array() else { return }
-                        guard let ratioName = try? x[1].text() else { return }
-                        guard let sizeText = try? x[2].text() else { return }
+                        let element = elements[i]
+                        guard let td = try? element.select("td").array() else { continue }
+                        guard let ratioName = try? td[1].text() else { continue }
+                        guard let sizeText = try? td[2].text() else { continue }
+                        guard let countries = try? td[0].text() else { continue }
+                        
                         
                         let widthArr = sizeText.split(separator: "x")
                         let heightArr = widthArr[1].split(separator: " ")
                         
-                        guard let width = Double(widthArr[0]) else { return }
-                        guard let height = Double(heightArr[0]) else { return }
+                        guard let width = Double(widthArr[0]) else { continue }
+                        guard let height = Double(heightArr[0]) else { continue }
                         
                         self?.aspecRatios.append((width: width, height: height, name: ratioName))
+                        if !countries.isEmpty {
+                            self?.countries.append(countries)
+                        }
+                        
                         
                     }
                 }
@@ -64,7 +70,7 @@ class ImportController: UIViewController, UIImagePickerControllerDelegate, UINav
     }
     
     func cropViewControllerDidCrop(_ cropViewController: CropViewController, cropped: UIImage, transformation: Transformation) {
-        
+        print(countries, countries.count)
         dismiss(animated: true)
         let croppedImage = cropped
         tabBarController?.viewControllers?.forEach({
@@ -99,11 +105,13 @@ class ImportController: UIViewController, UIImagePickerControllerDelegate, UINav
             
             DispatchQueue.global(qos: .userInitiated).async {
                 [weak self] in
-                guard let count = self?.aspecRatios.count else { return }
-                for i in 0..<count {
-                    guard let line = self?.aspecRatios[i] else { continue }
+                guard let self = self else { return }
+                
+                for i in 0..<self.aspecRatios.count {
+                    let line = self.aspecRatios[i]
                     configure.addCustomRatio(byHorizontalWidth: line.width, andHorizontalHeight: line.height, name: line.name)
                 }
+                configure.addCountries(country: self.countries)
             }
             
             
