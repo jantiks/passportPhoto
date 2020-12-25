@@ -170,53 +170,76 @@
                                 </constraints>
                             </view>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Image is ready" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qaI-fM-jkA">
-                                <rect key="frame" x="114.5" y="124" width="185.5" height="36"/>
+                                <rect key="frame" x="114.5" y="84" width="185.5" height="76"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="30"/>
                                 <color key="textColor" systemColor="systemBlueColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8Vd-QX-Q06">
-                                <rect key="frame" x="20" y="742" width="160" height="42"/>
-                                <color key="backgroundColor" systemColor="systemBlueColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="13" translatesAutoresizingMaskIntoConstraints="NO" id="CKH-Fr-Nwd">
+                                <rect key="frame" x="127" y="660" width="160" height="152"/>
+                                <subviews>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8Vd-QX-Q06">
+                                        <rect key="frame" x="0.0" y="0.0" width="160" height="42"/>
+                                        <color key="backgroundColor" systemColor="systemBlueColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="160" id="Voo-ks-mfD"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="23"/>
+                                        <state key="normal" title="Download">
+                                            <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="downloadTapped:" destination="aog-Nv-cf3" eventType="touchUpInside" id="p8D-lc-Yln"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hFw-kC-3e8">
+                                        <rect key="frame" x="0.0" y="55" width="160" height="42"/>
+                                        <color key="backgroundColor" systemColor="systemBlueColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="160" id="bm8-Pk-xwq"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="23"/>
+                                        <state key="normal" title="Print">
+                                            <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="printTapped:" destination="aog-Nv-cf3" eventType="touchUpInside" id="oPd-U3-mPp"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gfj-mJ-wN9">
+                                        <rect key="frame" x="0.0" y="110" width="160" height="42"/>
+                                        <color key="backgroundColor" systemColor="systemBlueColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="160" id="xa3-dB-eZG"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="23"/>
+                                        <state key="normal" title="Crop Again">
+                                            <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="cropAgainTapped:" destination="aog-Nv-cf3" eventType="touchUpInside" id="xMf-qN-JDk"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
                                 <constraints>
-                                    <constraint firstAttribute="width" constant="160" id="D5S-cx-Zms"/>
+                                    <constraint firstItem="gfj-mJ-wN9" firstAttribute="width" secondItem="8Vd-QX-Q06" secondAttribute="height" multiplier="80:21" id="JXg-Cu-Dss"/>
+                                    <constraint firstItem="8Vd-QX-Q06" firstAttribute="width" secondItem="hFw-kC-3e8" secondAttribute="height" multiplier="80:21" id="MWQ-RU-L8B"/>
+                                    <constraint firstItem="hFw-kC-3e8" firstAttribute="width" secondItem="gfj-mJ-wN9" secondAttribute="height" multiplier="80:21" id="l7x-GD-RZh"/>
                                 </constraints>
-                                <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="25"/>
-                                <state key="normal" title="Download">
-                                    <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                </state>
-                                <connections>
-                                    <action selector="downloadTapped:" destination="aog-Nv-cf3" eventType="touchUpInside" id="p8D-lc-Yln"/>
-                                </connections>
-                            </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gfj-mJ-wN9">
-                                <rect key="frame" x="234" y="742" width="160" height="42"/>
-                                <color key="backgroundColor" systemColor="systemBlueColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" constant="160" id="Y9k-UL-dDS"/>
-                                </constraints>
-                                <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="25"/>
-                                <state key="normal" title="Crop Again">
-                                    <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                </state>
-                                <connections>
-                                    <action selector="cropAgainTapped:" destination="aog-Nv-cf3" eventType="touchUpInside" id="xMf-qN-JDk"/>
-                                </connections>
-                            </button>
+                            </stackView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
+                            <constraint firstItem="CKH-Fr-Nwd" firstAttribute="centerX" secondItem="QJL-4y-hYY" secondAttribute="centerX" id="0pW-bu-gMo"/>
                             <constraint firstItem="fT9-De-JUt" firstAttribute="centerY" secondItem="QJL-4y-hYY" secondAttribute="centerY" id="9pB-A0-Nt0"/>
-                            <constraint firstItem="QJL-4y-hYY" firstAttribute="bottom" secondItem="8Vd-QX-Q06" secondAttribute="bottom" constant="29" id="B4n-dC-SdN"/>
-                            <constraint firstItem="QJL-4y-hYY" firstAttribute="trailing" secondItem="gfj-mJ-wN9" secondAttribute="trailing" constant="20" id="IlW-SX-AeU"/>
                             <constraint firstItem="fT9-De-JUt" firstAttribute="leading" secondItem="QJL-4y-hYY" secondAttribute="leading" id="OIc-xj-JBX"/>
-                            <constraint firstItem="qaI-fM-jkA" firstAttribute="top" secondItem="QJL-4y-hYY" secondAttribute="top" constant="80" id="Tx9-Ee-saU"/>
                             <constraint firstItem="qaI-fM-jkA" firstAttribute="centerX" secondItem="QJL-4y-hYY" secondAttribute="centerX" id="aKg-g2-rEx"/>
                             <constraint firstItem="fT9-De-JUt" firstAttribute="trailing" secondItem="QJL-4y-hYY" secondAttribute="trailing" id="dXy-Vr-WCy"/>
                             <constraint firstItem="fT9-De-JUt" firstAttribute="centerX" secondItem="QJL-4y-hYY" secondAttribute="centerX" id="ejM-mI-36U"/>
-                            <constraint firstItem="QJL-4y-hYY" firstAttribute="bottom" secondItem="gfj-mJ-wN9" secondAttribute="bottom" constant="29" id="mrV-uu-Q4A"/>
-                            <constraint firstItem="8Vd-QX-Q06" firstAttribute="leading" secondItem="QJL-4y-hYY" secondAttribute="leading" constant="20" id="o1n-fX-LTV"/>
-                            <constraint firstItem="gfj-mJ-wN9" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="8Vd-QX-Q06" secondAttribute="trailing" constant="20" id="tNi-Lk-Xts"/>
+                            <constraint firstItem="QJL-4y-hYY" firstAttribute="bottom" secondItem="CKH-Fr-Nwd" secondAttribute="bottom" constant="1" id="gWc-Lo-CUp"/>
+                            <constraint firstItem="qaI-fM-jkA" firstAttribute="top" secondItem="QJL-4y-hYY" secondAttribute="top" constant="40" id="ru9-2f-Mff"/>
+                            <constraint firstItem="CKH-Fr-Nwd" firstAttribute="top" relation="greaterThanOrEqual" secondItem="fT9-De-JUt" secondAttribute="bottom" constant="10" id="xQu-MR-0XN"/>
+                            <constraint firstItem="fT9-De-JUt" firstAttribute="top" relation="lessThanOrEqual" secondItem="qaI-fM-jkA" secondAttribute="bottom" constant="102" id="yol-u4-WZk"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="QJL-4y-hYY"/>
                     </view>
@@ -225,6 +248,7 @@
                         <outlet property="cropAgainButton" destination="gfj-mJ-wN9" id="yzH-bD-hLr"/>
                         <outlet property="downloadButton" destination="8Vd-QX-Q06" id="Uwn-Xo-62j"/>
                         <outlet property="imageView" destination="m82-jw-dS7" id="7sH-Fy-k5n"/>
+                        <outlet property="printButton" destination="hFw-kC-3e8" id="BOH-Nd-Qfy"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="vOt-KC-RcY" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>

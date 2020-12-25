@@ -8,10 +8,11 @@
 
 import UIKit
 
-class ExportController: UIViewController {
+class ExportController: UIViewController, UIPrintInteractionControllerDelegate, UINavigationControllerDelegate {
 
     @IBOutlet var cropAgainButton: UIButton!
     @IBOutlet var downloadButton: UIButton!
+    @IBOutlet var printButton: UIButton!
     var croppedImage: UIImage?
     
     
@@ -27,6 +28,11 @@ class ExportController: UIViewController {
         downloadButton.layer.borderWidth = 3
         downloadButton.layer.cornerRadius = 5
         downloadButton.layer.borderColor = UIColor.systemBlue.cgColor
+        
+        printButton.layer.borderWidth = 3
+        printButton.layer.cornerRadius = 5
+        printButton.layer.borderColor = UIColor.systemBlue.cgColor
+        
     
     }
 
@@ -44,10 +50,31 @@ class ExportController: UIViewController {
         UIImageWriteToSavedPhotosAlbum(image, self, #selector(image(_:didFinishSavingWithError:contextInfo:)), nil)
     }
     
+    @IBAction func printTapped(_ sender: Any) {
+        guard let pngData = imageView.image?.pngData() else { return }
+        if UIPrintInteractionController.canPrint(pngData) {
+            let printInfo = UIPrintInfo(dictionary: nil)
+            printInfo.jobName = "Job Name"
+            printInfo.outputType = .photo
+            
+            let printController = UIPrintInteractionController()
+            printController.delegate = self
+            printController.printInfo = printInfo
+            
+            printController.printingItem = pngData
+            
+            printController.present(animated: true, completionHandler: nil)
+        }
+        
+    }
+    
+    
     @IBAction func cropAgainTapped(_ sender: Any) {
         tabBarController?.tabBar.items?[1].isEnabled = false
         tabBarController?.selectedIndex = 0
     }
+    
+    
     
     @objc func image(_ image: UIImage, didFinishSavingWithError error: Error?, contextInfo: UnsafeRawPointer) {
         
