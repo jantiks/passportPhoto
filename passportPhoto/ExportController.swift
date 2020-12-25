@@ -9,7 +9,7 @@
 import UIKit
 
 class ExportController: UIViewController, UIPrintInteractionControllerDelegate, UINavigationControllerDelegate {
-
+    
     @IBOutlet var cropAgainButton: UIButton!
     @IBOutlet var downloadButton: UIButton!
     @IBOutlet var printButton: UIButton!
@@ -33,9 +33,9 @@ class ExportController: UIViewController, UIPrintInteractionControllerDelegate, 
         printButton.layer.cornerRadius = 5
         printButton.layer.borderColor = UIColor.systemBlue.cgColor
         
-    
+        
     }
-
+    
     override func viewWillAppear(_ animated: Bool) {
         if let image = croppedImage {
             imageView.image = image
@@ -51,19 +51,50 @@ class ExportController: UIViewController, UIPrintInteractionControllerDelegate, 
     }
     
     @IBAction func printTapped(_ sender: Any) {
+        guard let image = imageView.image else { return }
+        
+        let view = UIView()
+        
+        
+        
+        
         guard let pngData = imageView.image?.pngData() else { return }
-        if UIPrintInteractionController.canPrint(pngData) {
-            let printInfo = UIPrintInfo(dictionary: nil)
-            printInfo.jobName = "Job Name"
-            printInfo.outputType = .photo
-            
-            let printController = UIPrintInteractionController()
-            printController.delegate = self
-            printController.printInfo = printInfo
-            
-            printController.printingItem = pngData
-            
-            printController.present(animated: true, completionHandler: nil)
+
+
+
+        let printController = UIPrintInteractionController.shared
+        printController.delegate = self
+        let paperSize = printController.printPaper?.paperSize
+        print(paperSize)
+        printController.showsPaperSelectionForLoadedPapers = true
+
+        guard var img = imageView.image else { return }
+
+        let size = CGSize(width: 100, height: 20)
+
+        img = imageResize(image: img, sizeChange: size)
+
+        printController.printingItem = img
+
+        printController.present(animated: true, completionHandler: nil)
+
+        
+    }
+    
+    
+    func imageResize(image: UIImage, sizeChange: CGSize) -> UIImage {
+        let hasAlpha = true
+        let scale: CGFloat = 0.0
+        
+        UIGraphicsBeginImageContextWithOptions(sizeChange, !hasAlpha, scale)
+        
+        image.draw(in: CGRect(origin: CGPoint(x: 0, y: 0), size: sizeChange))
+        
+        if let scaledImage = UIGraphicsGetImageFromCurrentImageContext() {
+            UIGraphicsEndImageContext()
+            return scaledImage
+        } else {
+            return image
         }
         
     }
@@ -87,5 +118,5 @@ class ExportController: UIViewController, UIPrintInteractionControllerDelegate, 
             present(ac, animated: true)
         }
     }
-
+    
 }
