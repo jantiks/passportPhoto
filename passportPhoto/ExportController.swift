@@ -20,7 +20,6 @@ class ExportController: UIViewController, UIPrintInteractionControllerDelegate, 
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        
         cropAgainButton.layer.borderWidth = 3
         cropAgainButton.layer.cornerRadius = 5
         cropAgainButton.layer.borderColor = UIColor.systemBlue.cgColor
@@ -51,60 +50,54 @@ class ExportController: UIViewController, UIPrintInteractionControllerDelegate, 
     }
     
     @IBAction func printTapped(_ sender: Any) {
-        guard var img = imageView.image else { return }
+        guard let img = imageView else { return }
         
 
         let printController = UIPrintInteractionController.shared
         printController.delegate = self
         let paperSize = printController.printPaper?.paperSize
-//        print(paperSize)
+        print(paperSize)
         printController.showsPaperSelectionForLoadedPapers = true
         
         
-
-        let size = CGSize(width: 500, height: 500)
-
-        let  changedImg = imageResize(croppingImageView: imageView, sizeChange: size)
+        let size = CGSize(width: 1000, height: 1000)
+        let  changedImg = imageResize(croppingImageView: img, viewSize: size)
         
-        
-        printController.printingItems = [changedImg]
-
+        printController.printingItem = changedImg
         printController.present(animated: true, completionHandler: nil)
 
         
     }
     
     
-    func imageResize(croppingImageView: UIImageView, sizeChange: CGSize) -> UIImage {
+    func imageResize(croppingImageView: UIImageView, viewSize: CGSize) -> UIImage {
         
-        let img = croppingImageView
         let newView = UIView()
-        newView.frame.size = CGSize(width: 500, height: 500)
+        newView.frame.size = viewSize
         print(newView.frame.size)
 
-        newView.backgroundColor = .blue
-        newView.addSubview(img)
         
-
+        
+        newView.backgroundColor = .blue
+        if let width = croppingImageView.image?.size.width {
+            if let height = croppingImageView.image?.size.height {
+                let columns: Int = Int(newView.frame.size.width / width)
+                let rows: Int = Int(newView.frame.size.height / height)
+                print("passed it")
+                print(rows)
+                for _ in 0..<2 {
+                    for _ in 0..<2 {
+                        let img = UIImageView.init(image: croppingImageView.image)
+                        img.frame.size = CGSize(width: 100, height: 100)
+                        newView.addSubview(img) //
+                    }
+                }
+            }
+        }
+//        newView.addSubview(img)
+        
         let rederedImage = newView.asImage()
         return rederedImage
-        
-//        NSLayoutConstraint.activate([img.topAnchor.constraint(equalTo:                            view.layoutMarginsGuide.topAnchor, constant: 50),
-//                                    img.trailingAnchor.constraint(equalTo: view.layoutMarginsGuide.trailingAnchor, constant: 50)])
-
-//        UIGraphicsBeginImageContextWithOptions(sizeChange, !hasAlpha, scale)
-//
-//        newView.draw(CGRect(origin: CGPoint(x: 0, y: 0), size: sizeChange))
-//
-        
-//        if let scaledImage = UIGraphicsGetImageFromCurrentImageContext() {
-//            UIGraphicsEndImageContext()
-//            print("passed")
-//            return croppingImageView.image!
-//
-//        } else {
-//            return croppingImageView.image!
-//        }
         
     }
     
