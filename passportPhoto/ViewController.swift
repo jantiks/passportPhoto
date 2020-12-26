@@ -92,10 +92,7 @@ class ImportController: UIViewController, UIImagePickerControllerDelegate, UINav
         
         currentImage = image
         
-        
-        
         dismiss(animated: true)
-        
         if let image = currentImage {
             
             let cropController = Mantis.cropViewController(image: image)

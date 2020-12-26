@@ -51,30 +51,23 @@ class ExportController: UIViewController, UIPrintInteractionControllerDelegate, 
     }
     
     @IBAction func printTapped(_ sender: Any) {
-        guard let image = imageView.image else { return }
+        guard var img = imageView.image else { return }
         
-        let view = UIView()
-        
-        
-        
-        
-        guard let pngData = imageView.image?.pngData() else { return }
-
-
 
         let printController = UIPrintInteractionController.shared
         printController.delegate = self
         let paperSize = printController.printPaper?.paperSize
-        print(paperSize)
+//        print(paperSize)
         printController.showsPaperSelectionForLoadedPapers = true
+        
+        
 
-        guard var img = imageView.image else { return }
+        let size = CGSize(width: 500, height: 500)
 
-        let size = CGSize(width: 100, height: 20)
-
-        img = imageResize(image: img, sizeChange: size)
-
-        printController.printingItem = img
+        let  changedImg = imageResize(croppingImageView: imageView, sizeChange: size)
+        
+        
+        printController.printingItems = [changedImg]
 
         printController.present(animated: true, completionHandler: nil)
 
@@ -82,20 +75,36 @@ class ExportController: UIViewController, UIPrintInteractionControllerDelegate, 
     }
     
     
-    func imageResize(image: UIImage, sizeChange: CGSize) -> UIImage {
-        let hasAlpha = true
-        let scale: CGFloat = 0.0
+    func imageResize(croppingImageView: UIImageView, sizeChange: CGSize) -> UIImage {
         
-        UIGraphicsBeginImageContextWithOptions(sizeChange, !hasAlpha, scale)
+        let img = croppingImageView
+        let newView = UIView()
+        newView.frame.size = CGSize(width: 500, height: 500)
+        print(newView.frame.size)
+
+        newView.backgroundColor = .blue
+        newView.addSubview(img)
         
-        image.draw(in: CGRect(origin: CGPoint(x: 0, y: 0), size: sizeChange))
+
+        let rederedImage = newView.asImage()
+        return rederedImage
         
-        if let scaledImage = UIGraphicsGetImageFromCurrentImageContext() {
-            UIGraphicsEndImageContext()
-            return scaledImage
-        } else {
-            return image
-        }
+//        NSLayoutConstraint.activate([img.topAnchor.constraint(equalTo:                            view.layoutMarginsGuide.topAnchor, constant: 50),
+//                                    img.trailingAnchor.constraint(equalTo: view.layoutMarginsGuide.trailingAnchor, constant: 50)])
+
+//        UIGraphicsBeginImageContextWithOptions(sizeChange, !hasAlpha, scale)
+//
+//        newView.draw(CGRect(origin: CGPoint(x: 0, y: 0), size: sizeChange))
+//
+        
+//        if let scaledImage = UIGraphicsGetImageFromCurrentImageContext() {
+//            UIGraphicsEndImageContext()
+//            print("passed")
+//            return croppingImageView.image!
+//
+//        } else {
+//            return croppingImageView.image!
+//        }
         
     }
     
@@ -116,6 +125,18 @@ class ExportController: UIViewController, UIPrintInteractionControllerDelegate, 
             let ac = UIAlertController(title: "Saved!", message: "Image has beed save to your photos", preferredStyle: .alert)
             ac.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
             present(ac, animated: true)
+        }
+    }
+    
+}
+
+extension UIView {
+    
+    func asImage() -> UIImage {
+        let renderer = UIGraphicsImageRenderer(bounds: bounds)
+        return renderer.image { rendererContect in
+            layer.render(in: rendererContect.cgContext)
+            
         }
     }
     
