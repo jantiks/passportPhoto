@@ -12,8 +12,9 @@ import SwiftSoup
 
 class ImportController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate,CropViewControllerDelegate {
     
+    
     var currentImage: UIImage?
-    var aspecRatios = [(width: Double, height: Double, name: String)]()
+    var aspecRatios = [(width: Double, height: Double, name: String, sizeType: String)]()
     var countries = [String]()
 
     override func viewDidLoad() {
@@ -41,18 +42,22 @@ class ImportController: UIViewController, UIImagePickerControllerDelegate, UINav
                         
                         let element = elements[i]
                         guard let td = try? element.select("td").array() else { continue }
+                        
                         guard let ratioName = try? td[1].text() else { continue }
                         guard let sizeText = try? td[2].text() else { continue }
+                        
                         guard let countries = try? td[0].text() else { continue }
                         
                         
                         let widthArr = sizeText.split(separator: "x")
                         let heightArr = widthArr[1].split(separator: " ")
                         
+                        
+                        
                         guard let width = Double(widthArr[0]) else { continue }
                         guard let height = Double(heightArr[0]) else { continue }
                         
-                        self?.aspecRatios.append((width: width, height: height, name: ratioName))
+                        self?.aspecRatios.append((width: width, height: height, name: ratioName, sizeType: "vzgo"))
                         if !countries.isEmpty {
                             self?.countries.append(countries)
                         }
@@ -69,17 +74,23 @@ class ImportController: UIViewController, UIImagePickerControllerDelegate, UINav
          
     }
     
-    func cropViewControllerDidCrop(_ cropViewController: CropViewController, cropped: UIImage, transformation: Transformation) {
-        print(countries, countries.count)
+    func cropViewControllerDidCrop(_ cropViewController: CropViewController, cropped: UIImage, transformation: Transformation, name: String) {
         dismiss(animated: true)
         let croppedImage = cropped
+        var sizeArr = [(width: Double,height: Double)]()
+        if !name.isEmpty {
+            sizeArr = definePixelOrCm(name: name)
+        }
         tabBarController?.viewControllers?.forEach({
             if let controller = $0 as? ExportController {
                 controller.croppedImage = croppedImage
+                controller.sizeArr = sizeArr
                 tabBarController?.tabBar.items?[1].isEnabled = true
                 tabBarController?.selectedIndex = 1
             }
         })
+        
+        
     }
     
     func cropViewControllerDidCancel(_ cropViewController: CropViewController, original: UIImage) {
@@ -119,6 +130,37 @@ class ImportController: UIViewController, UIImagePickerControllerDelegate, UINav
                 self?.present(cropController, animated: true)
             }
             
+        }
+        
+    }
+    
+    func definePixelOrCm(name: String) -> [(width: Double, height: Double)] {
+        var widthInPixels: Double = 600
+        var heightInPixels: Double = 600
+    
+        if let sizeArr = name.components(separatedBy: " ").last {
+            if let width = Double(sizeArr.components(separatedBy: ":")[0]) {
+                
+                if width > 100 {
+                    widthInPixels = width
+                } else {
+                    widthInPixels = width * 118
+                }
+                
+            }
+            if let height = Double(sizeArr.components(separatedBy: ":")[1]) {
+                if height > 100 {
+                    heightInPixels = height
+                } else {
+                    heightInPixels = height * 118
+                }
+                
+            }
+            
+            return [(widthInPixels, heightInPixels)]
+        }
+        else {
+            return [(widthInPixels, heightInPixels)]
         }
         
     }

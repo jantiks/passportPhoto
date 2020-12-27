@@ -13,9 +13,9 @@
 		98261559258FBBD200100168 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 98261557258FBBD200100168 /* Main.storyboard */; };
 		9826155B258FBBD500100168 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9826155A258FBBD500100168 /* Assets.xcassets */; };
 		9826155E258FBBD500100168 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9826155C258FBBD500100168 /* LaunchScreen.storyboard */; };
+		984D7D812598792D0052EC29 /* Mantis in Frameworks */ = {isa = PBXBuildFile; productRef = 984D7D802598792D0052EC29 /* Mantis */; };
+		984D7D8425988FFA0052EC29 /* SwiftSoup in Frameworks */ = {isa = PBXBuildFile; productRef = 984D7D8325988FFA0052EC29 /* SwiftSoup */; };
 		986C737F258FD41C003D97D9 /* ExportController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 986C737E258FD41C003D97D9 /* ExportController.swift */; };
-		98AE341225932C97007E1E76 /* SwiftSoup in Frameworks */ = {isa = PBXBuildFile; productRef = 98AE341125932C97007E1E76 /* SwiftSoup */; };
-		98E53A9725951A1F00BEC52C /* Mantis in Frameworks */ = {isa = PBXBuildFile; productRef = 98E53A9625951A1F00BEC52C /* Mantis */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -27,6 +27,7 @@
 		9826155A258FBBD500100168 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		9826155D258FBBD500100168 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		9826155F258FBBD500100168 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		984D7D7E259878BF0052EC29 /* CropVC */ = {isa = PBXFileReference; lastKnownFileType = folder; name = CropVC; path = ../../../Documents/CropVC; sourceTree = "<group>"; };
 		986C737E258FD41C003D97D9 /* ExportController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExportController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -35,8 +36,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				98E53A9725951A1F00BEC52C /* Mantis in Frameworks */,
-				98AE341225932C97007E1E76 /* SwiftSoup in Frameworks */,
+				984D7D812598792D0052EC29 /* Mantis in Frameworks */,
+				984D7D8425988FFA0052EC29 /* SwiftSoup in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -53,6 +54,7 @@
 		98261545258FBBD200100168 = {
 			isa = PBXGroup;
 			children = (
+				984D7D7E259878BF0052EC29 /* CropVC */,
 				98261550258FBBD200100168 /* passportPhoto */,
 				9826154F258FBBD200100168 /* Products */,
 				981E9CA4259278B5005FA88D /* Frameworks */,
@@ -99,8 +101,8 @@
 			);
 			name = passportPhoto;
 			packageProductDependencies = (
-				98AE341125932C97007E1E76 /* SwiftSoup */,
-				98E53A9625951A1F00BEC52C /* Mantis */,
+				984D7D802598792D0052EC29 /* Mantis */,
+				984D7D8325988FFA0052EC29 /* SwiftSoup */,
 			);
 			productName = passportPhoto;
 			productReference = 9826154E258FBBD200100168 /* passportPhoto.app */;
@@ -143,8 +145,8 @@
 			);
 			mainGroup = 98261545258FBBD200100168;
 			packageReferences = (
-				98AE341025932C97007E1E76 /* XCRemoteSwiftPackageReference "SwiftSoup" */,
-				98E53A9525951A1F00BEC52C /* XCRemoteSwiftPackageReference "CropVC" */,
+				984D7D7F2598792D0052EC29 /* XCRemoteSwiftPackageReference "CropVC" */,
+				984D7D8225988FFA0052EC29 /* XCRemoteSwiftPackageReference "SwiftSoup" */,
 			);
 			productRefGroup = 9826154F258FBBD200100168 /* Products */;
 			projectDirPath = "";
@@ -374,15 +376,7 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
-		98AE341025932C97007E1E76 /* XCRemoteSwiftPackageReference "SwiftSoup" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/scinfu/SwiftSoup";
-			requirement = {
-				kind = upToNextMajorVersion;
-				minimumVersion = 2.3.2;
-			};
-		};
-		98E53A9525951A1F00BEC52C /* XCRemoteSwiftPackageReference "CropVC" */ = {
+		984D7D7F2598792D0052EC29 /* XCRemoteSwiftPackageReference "CropVC" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "git@github.com:jantiks/CropVC.git";
 			requirement = {
@@ -390,18 +384,26 @@
 				kind = branch;
 			};
 		};
+		984D7D8225988FFA0052EC29 /* XCRemoteSwiftPackageReference "SwiftSoup" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/scinfu/SwiftSoup";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 2.3.2;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
-		98AE341125932C97007E1E76 /* SwiftSoup */ = {
+		984D7D802598792D0052EC29 /* Mantis */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = 98AE341025932C97007E1E76 /* XCRemoteSwiftPackageReference "SwiftSoup" */;
-			productName = SwiftSoup;
-		};
-		98E53A9625951A1F00BEC52C /* Mantis */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 98E53A9525951A1F00BEC52C /* XCRemoteSwiftPackageReference "CropVC" */;
+			package = 984D7D7F2598792D0052EC29 /* XCRemoteSwiftPackageReference "CropVC" */;
 			productName = Mantis;
+		};
+		984D7D8325988FFA0052EC29 /* SwiftSoup */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 984D7D8225988FFA0052EC29 /* XCRemoteSwiftPackageReference "SwiftSoup" */;
+			productName = SwiftSoup;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};

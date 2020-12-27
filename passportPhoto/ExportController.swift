@@ -14,6 +14,8 @@ class ExportController: UIViewController, UIPrintInteractionControllerDelegate, 
     @IBOutlet var downloadButton: UIButton!
     @IBOutlet var printButton: UIButton!
     var croppedImage: UIImage?
+    var sizeArr = [(width: Double, height: Double)]()
+    let paperSize = CGSize(width: 2480, height: 3508)
     
     
     @IBOutlet var imageView: UIImageView!
@@ -55,13 +57,9 @@ class ExportController: UIViewController, UIPrintInteractionControllerDelegate, 
 
         let printController = UIPrintInteractionController.shared
         printController.delegate = self
-        let paperSize = printController.printPaper?.paperSize
-        print(paperSize)
         printController.showsPaperSelectionForLoadedPapers = true
         
-        
-        let size = CGSize(width: 1000, height: 1000)
-        let  changedImg = imageResize(croppingImageView: img, viewSize: size)
+        let  changedImg = imageResize(croppingImageView: img, viewSize: paperSize)
         
         printController.printingItem = changedImg
         printController.present(animated: true, completionHandler: nil)
@@ -72,28 +70,25 @@ class ExportController: UIViewController, UIPrintInteractionControllerDelegate, 
     
     func imageResize(croppingImageView: UIImageView, viewSize: CGSize) -> UIImage {
         
+        let imageWidth: Double = sizeArr[0].width
+        let imageHeight: Double = sizeArr[0].height
         let newView = UIView()
         newView.frame.size = viewSize
-        print(newView.frame.size)
-
         
+        let columns: Int = Int(viewSize.width / CGFloat(imageWidth))
+        let rows: Int = Int(viewSize.height / CGFloat(imageHeight))
         
-        newView.backgroundColor = .blue
-        if let width = croppingImageView.image?.size.width {
-            if let height = croppingImageView.image?.size.height {
-                let columns: Int = Int(newView.frame.size.width / width)
-                let rows: Int = Int(newView.frame.size.height / height)
-                print("passed it")
-                print(rows)
-                for _ in 0..<2 {
-                    for _ in 0..<2 {
-                        let img = UIImageView.init(image: croppingImageView.image)
-                        img.frame.size = CGSize(width: 100, height: 100)
-                        newView.addSubview(img) //
-                    }
-                }
+        print(rows)
+        print(columns)
+        for _ in 0..<columns {
+            for _ in 0..<rows {
+                let img = UIImageView.init(image: croppingImageView.image)
+                img.frame.size = CGSize(width: imageWidth, height: imageHeight)
+                newView.addSubview(img) //
             }
         }
+            
+        
 //        newView.addSubview(img)
         
         let rederedImage = newView.asImage()
