@@ -58,7 +58,9 @@ class ExportController: UIViewController, UIPrintInteractionControllerDelegate, 
         let printController = UIPrintInteractionController.shared
         printController.delegate = self
         printController.showsPaperSelectionForLoadedPapers = true
-        
+        let printInfo = UIPrintInfo.printInfo()
+        printInfo.outputType = .photo
+        printController.printInfo = printInfo
         let  changedImg = imageResize(croppingImageView: img, viewSize: paperSize)
         
         printController.printingItem = changedImg
@@ -74,24 +76,17 @@ class ExportController: UIViewController, UIPrintInteractionControllerDelegate, 
         let imageHeight: Double = sizeArr[0].height
         let newView = UIView()
         newView.frame.size = viewSize
-        let columns: Int = Int(viewSize.width / (CGFloat(imageWidth)))
-        let rows: Int = Int(viewSize.height / (CGFloat(imageHeight)))
-        
-        print(rows)
-        print(columns)
+        let columns: Int = Int(viewSize.width / ((CGFloat(imageWidth)) + 30))
+        let rows: Int = Int(viewSize.height / ((CGFloat(imageHeight)) + 30))
         
         for column in 0..<columns {
             for row in 0..<rows {
                 let img = UIImageView.init(image: croppingImageView.image)
-                img.frame = CGRect(x: (Double(column) * imageWidth) , y: (Double(row) * imageHeight), width: imageWidth, height: imageHeight)
-                print(img.frame.minX)
-                newView.addSubview(img) //
+                img.frame = CGRect(x: (Double(column) * imageWidth) + Double(column * 60) , y: ((Double(row) * imageHeight)) + Double(row * 60), width: imageWidth, height: imageHeight)
+                
+                newView.addSubview(img)
             }
         }
-        
-            
-        
-//        newView.addSubview(img)
         
         let rederedImage = newView.asImage()
         return rederedImage
