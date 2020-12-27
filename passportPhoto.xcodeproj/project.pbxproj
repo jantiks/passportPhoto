@@ -27,7 +27,6 @@
 		9826155A258FBBD500100168 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		9826155D258FBBD500100168 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		9826155F258FBBD500100168 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		984D7D7E259878BF0052EC29 /* CropVC */ = {isa = PBXFileReference; lastKnownFileType = folder; name = CropVC; path = ../../../Documents/CropVC; sourceTree = "<group>"; };
 		986C737E258FD41C003D97D9 /* ExportController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExportController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -54,7 +53,6 @@
 		98261545258FBBD200100168 = {
 			isa = PBXGroup;
 			children = (
-				984D7D7E259878BF0052EC29 /* CropVC */,
 				98261550258FBBD200100168 /* passportPhoto */,
 				9826154F258FBBD200100168 /* Products */,
 				981E9CA4259278B5005FA88D /* Frameworks */,

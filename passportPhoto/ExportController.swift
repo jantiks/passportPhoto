@@ -74,19 +74,21 @@ class ExportController: UIViewController, UIPrintInteractionControllerDelegate, 
         let imageHeight: Double = sizeArr[0].height
         let newView = UIView()
         newView.frame.size = viewSize
-        
-        let columns: Int = Int(viewSize.width / CGFloat(imageWidth))
-        let rows: Int = Int(viewSize.height / CGFloat(imageHeight))
+        let columns: Int = Int(viewSize.width / (CGFloat(imageWidth)))
+        let rows: Int = Int(viewSize.height / (CGFloat(imageHeight)))
         
         print(rows)
         print(columns)
-        for _ in 0..<columns {
-            for _ in 0..<rows {
+        
+        for column in 0..<columns {
+            for row in 0..<rows {
                 let img = UIImageView.init(image: croppingImageView.image)
-                img.frame.size = CGSize(width: imageWidth, height: imageHeight)
+                img.frame = CGRect(x: (Double(column) * imageWidth) , y: (Double(row) * imageHeight), width: imageWidth, height: imageHeight)
+                print(img.frame.minX)
                 newView.addSubview(img) //
             }
         }
+        
             
         
 //        newView.addSubview(img)
