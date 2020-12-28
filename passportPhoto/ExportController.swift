@@ -15,7 +15,7 @@ class ExportController: UIViewController, UIPrintInteractionControllerDelegate, 
     @IBOutlet var printButton: UIButton!
     var croppedImage: UIImage?
     var sizeArr = [(width: Double, height: Double)]()
-    let paperSize = CGSize(width: 2480, height: 3508) //a4 paper size in pixeles
+    var paperSize = CGSize(width: 2480, height: 3505) //a4 paper size in pixeles
     
     
     @IBOutlet var imageView: UIImageView!
@@ -54,7 +54,46 @@ class ExportController: UIViewController, UIPrintInteractionControllerDelegate, 
     @IBAction func printTapped(_ sender: Any) {
         
         guard let img = imageView else { return }
+        var choosPaperTitle = "Paper"
+        var acTitle = "Paper and Quantity"
         let ac = UIAlertController(title: "Paper and Quantity", message: "Choose paper type and number of photos", preferredStyle: .alert)
+        let choosePaper = UIAlertAction(title: choosPaperTitle, style: .default) {
+            [weak ac, weak self] action in
+            
+            guard let ac = ac else { return }
+
+            
+            let paperSheet = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
+            
+            
+            let a4 = UIAlertAction(title: "A4 8.3 x 11.7 in", style: .default) { action in
+                let a2Width = 2480
+                let a2Height = 3505
+                
+                self?.paperSize = CGSize(width: a2Width, height: a2Height)
+                self?.present(ac, animated: true)
+            }
+            let a5 = UIAlertAction(title: "A5 5.8 x 8.3 in", style: .default) { action in
+                let a2Width = 1746
+                let a2Height = 2480
+                
+                self?.paperSize = CGSize(width: a2Width, height: a2Height)
+                self?.present(ac, animated: true)
+            }
+            let a6 = UIAlertAction(title: "A6 4.1 x 5.8 in", style: .default) { action in
+                let a2Width = 1239
+                let a2Height = 1746
+                
+                self?.paperSize = CGSize(width: a2Width, height: a2Height)
+                self?.present(ac, animated: true)
+            }
+            
+            
+            paperSheet.addAction(a4)
+            paperSheet.addAction(a5)
+            paperSheet.addAction(a6)
+            self?.present(paperSheet, animated: true)
+        }
         
         //print controller
         let presentPrintController = UIAlertAction(title: "Print", style: .default){ [weak self] action in
@@ -63,7 +102,7 @@ class ExportController: UIViewController, UIPrintInteractionControllerDelegate, 
             printController.delegate = self
             printController.showsPaperSelectionForLoadedPapers = true
             let printInfo = UIPrintInfo.printInfo()
-            printInfo.outputType = .photo
+            
             printController.printInfo = printInfo
             let  changedImg = self.imageResize(croppingImageView: img, viewSize: self.paperSize)
 
@@ -73,8 +112,8 @@ class ExportController: UIViewController, UIPrintInteractionControllerDelegate, 
 
         }
         
-        ac.addAction(<#T##action: UIAlertAction##UIAlertAction#>)
-        ac.addAction(<#T##action: UIAlertAction##UIAlertAction#>)
+        ac.addAction(choosePaper)
+//        ac.addAction(UIAlertAction)
         ac.addAction(presentPrintController)
         present(ac, animated: true)
 
