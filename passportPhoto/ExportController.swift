@@ -16,7 +16,8 @@ class ExportController: UIViewController, UIPrintInteractionControllerDelegate, 
     var croppedImage: UIImage?
     var sizeArr = [(width: Double, height: Double)]()
     var paperSize = CGSize(width: 2480, height: 3505) //a4 paper size in pixeles
-    
+    var photoCount = 6
+    var printedImages = 0
     
     @IBOutlet var imageView: UIImageView!
     override func viewDidLoad() {
@@ -54,12 +55,13 @@ class ExportController: UIViewController, UIPrintInteractionControllerDelegate, 
     @IBAction func printTapped(_ sender: Any) {
         
         guard let img = imageView else { return }
-        var choosPaperTitle = "Paper"
+        var paperType = ""
+        
         var acTitle = "Paper and Quantity"
-        let ac = UIAlertController(title: "Paper and Quantity", message: "Choose paper type and number of photos", preferredStyle: .alert)
-        let choosePaper = UIAlertAction(title: choosPaperTitle, style: .default) {
+        let ac = UIAlertController(title: acTitle, message: "Choose paper type and number of photos", preferredStyle: .alert)
+        let choosePaper = UIAlertAction(title: "Paper", style: .default) {
             [weak ac, weak self] action in
-            
+            guard let self = self else { return }
             guard let ac = ac else { return }
 
             
@@ -67,33 +69,41 @@ class ExportController: UIViewController, UIPrintInteractionControllerDelegate, 
             
             
             let a4 = UIAlertAction(title: "A4 8.3 x 11.7 in", style: .default) { action in
+                paperType = "A4"
                 let a2Width = 2480
                 let a2Height = 3505
                 
-                self?.paperSize = CGSize(width: a2Width, height: a2Height)
-                self?.present(ac, animated: true)
+                ac.title = "Paper is \(paperType) : photo count is \(self.photoCount)"
+                self.paperSize = CGSize(width: a2Width, height: a2Height)
+                self.present(ac, animated: true)
             }
             let a5 = UIAlertAction(title: "A5 5.8 x 8.3 in", style: .default) { action in
+                paperType = "A5"
                 let a2Width = 1746
                 let a2Height = 2480
                 
-                self?.paperSize = CGSize(width: a2Width, height: a2Height)
-                self?.present(ac, animated: true)
+                ac.title = "Paper is \(paperType) : photo count is \(self.photoCount)"
+                self.paperSize = CGSize(width: a2Width, height: a2Height)
+                self.present(ac, animated: true)
             }
             let a6 = UIAlertAction(title: "A6 4.1 x 5.8 in", style: .default) { action in
+                paperType = "A6"
                 let a2Width = 1239
                 let a2Height = 1746
                 
-                self?.paperSize = CGSize(width: a2Width, height: a2Height)
-                self?.present(ac, animated: true)
+                ac.title = "Paper is \(paperType) : photo count is \(self.photoCount)"
+                self.paperSize = CGSize(width: a2Width, height: a2Height)
+                self.present(ac, animated: true)
             }
             
             
             paperSheet.addAction(a4)
             paperSheet.addAction(a5)
             paperSheet.addAction(a6)
-            self?.present(paperSheet, animated: true)
+            self.present(paperSheet, animated: true)
         }
+        
+        let quantity = UIAlertAction(title: "Quantity", style: .default, handler: nil)
         
         //print controller
         let presentPrintController = UIAlertAction(title: "Print", style: .default){ [weak self] action in
@@ -113,7 +123,7 @@ class ExportController: UIViewController, UIPrintInteractionControllerDelegate, 
         }
         
         ac.addAction(choosePaper)
-//        ac.addAction(UIAlertAction)
+        ac.addAction(quantity)
         ac.addAction(presentPrintController)
         present(ac, animated: true)
 
@@ -134,10 +144,12 @@ class ExportController: UIViewController, UIPrintInteractionControllerDelegate, 
         
         for column in 0..<columns {
             for row in 0..<rows {
+                if printedImages == photoCount { break }
                 let img = UIImageView.init(image: croppingImageView.image)
                 img.frame = CGRect(x: (Double(column) * imageWidth) + Double(column * 60) , y: ((Double(row) * imageHeight)) + Double(row * 60), width: imageWidth, height: imageHeight)
                 
                 newView.addSubview(img)
+                printedImages += 1
             }
         }
         
