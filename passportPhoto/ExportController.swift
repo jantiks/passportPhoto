@@ -8,11 +8,12 @@
 
 import UIKit
 
-class ExportController: UIViewController, UIPrintInteractionControllerDelegate, UINavigationControllerDelegate {
+class ExportController: UIViewController, UIPrintInteractionControllerDelegate, UINavigationControllerDelegate, UIPickerViewDelegate, UIPickerViewDataSource {
     
     @IBOutlet var cropAgainButton: UIButton!
     @IBOutlet var downloadButton: UIButton!
     @IBOutlet var printButton: UIButton!
+    let coutNumbers = [1,2,3,4,5,6,7,8,9,10,11,12]
     var croppedImage: UIImage?
     var sizeArr = [(width: Double, height: Double)]()
     var paperSize = CGSize(width: 2480, height: 3505) //a4 paper size in pixeles
@@ -103,7 +104,21 @@ class ExportController: UIViewController, UIPrintInteractionControllerDelegate, 
             self.present(paperSheet, animated: true)
         }
         
-        let quantity = UIAlertAction(title: "Quantity", style: .default, handler: nil)
+        let quantity = UIAlertAction(title: "Quantity", style: .default) {
+            [weak self] action in
+            guard let self = self else { return }
+            let picker = UIPickerView()
+            picker.delegate = self
+            picker.translatesAutoresizingMaskIntoConstraints = false
+            picker.backgroundColor = .lightGray
+            UIView.transition(with: self.view, duration: 0.2, options: [.transitionCrossDissolve], animations: {
+              self.view.addSubview(picker)
+            }, completion: nil)
+        
+            NSLayoutConstraint.activate([picker.bottomAnchor.constraint(equalTo: self.view.layoutMarginsGuide.bottomAnchor, constant: 0),picker.centerXAnchor.constraint(equalTo: self.view.layoutMarginsGuide.centerXAnchor, constant: 0) , picker.widthAnchor.constraint(equalTo: self.view.layoutMarginsGuide.widthAnchor, multiplier: 2)])
+            
+        }
+        
         
         //print controller
         let presentPrintController = UIAlertAction(title: "Print", style: .default){ [weak self] action in
@@ -116,7 +131,7 @@ class ExportController: UIViewController, UIPrintInteractionControllerDelegate, 
             printController.printInfo = printInfo
             let  changedImg = self.imageResize(croppingImageView: img, viewSize: self.paperSize)
 
-            printController.printingItem = changedImg
+            printController.printingItems = [changedImg]
             printController.present(animated: true, completionHandler: nil)
 
 
@@ -131,6 +146,17 @@ class ExportController: UIViewController, UIPrintInteractionControllerDelegate, 
         
     }
     
+    func numberOfComponents(in pickerView: UIPickerView) -> Int {
+        1
+    }
+    
+    func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
+        12
+    }
+    
+    func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
+        return "\(coutNumbers[row])"
+    }
     
     
     func imageResize(croppingImageView: UIImageView, viewSize: CGSize) -> UIImage {
