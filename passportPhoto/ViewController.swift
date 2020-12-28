@@ -80,7 +80,11 @@ class ImportController: UIViewController, UIImagePickerControllerDelegate, UINav
         var sizeArr = [(width: Double,height: Double)]()
         if !name.isEmpty {
             sizeArr = definePixelOrCm(name: name)
+            print(name)
+        } else {
+            sizeArr = [(Double(transformation.scrollBounds.width),Double(transformation.scrollBounds.height))]
         }
+        print(transformation.scrollBounds.height)
         tabBarController?.viewControllers?.forEach({
             if let controller = $0 as? ExportController {
                 controller.croppedImage = croppedImage

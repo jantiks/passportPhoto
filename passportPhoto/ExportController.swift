@@ -15,7 +15,7 @@ class ExportController: UIViewController, UIPrintInteractionControllerDelegate, 
     @IBOutlet var printButton: UIButton!
     var croppedImage: UIImage?
     var sizeArr = [(width: Double, height: Double)]()
-    let paperSize = CGSize(width: 2480, height: 3508)
+    let paperSize = CGSize(width: 2480, height: 3508) //a4 paper size in pixeles
     
     
     @IBOutlet var imageView: UIImageView!
@@ -52,22 +52,36 @@ class ExportController: UIViewController, UIPrintInteractionControllerDelegate, 
     }
     
     @IBAction func printTapped(_ sender: Any) {
+        
         guard let img = imageView else { return }
+        let ac = UIAlertController(title: "Paper and Quantity", message: "Choose paper type and number of photos", preferredStyle: .alert)
         
+        //print controller
+        let presentPrintController = UIAlertAction(title: "Print", style: .default){ [weak self] action in
+            guard let self = self else { return }
+            let printController = UIPrintInteractionController.shared
+            printController.delegate = self
+            printController.showsPaperSelectionForLoadedPapers = true
+            let printInfo = UIPrintInfo.printInfo()
+            printInfo.outputType = .photo
+            printController.printInfo = printInfo
+            let  changedImg = self.imageResize(croppingImageView: img, viewSize: self.paperSize)
 
-        let printController = UIPrintInteractionController.shared
-        printController.delegate = self
-        printController.showsPaperSelectionForLoadedPapers = true
-        let printInfo = UIPrintInfo.printInfo()
-        printInfo.outputType = .photo
-        printController.printInfo = printInfo
-        let  changedImg = imageResize(croppingImageView: img, viewSize: paperSize)
+            printController.printingItem = changedImg
+            printController.present(animated: true, completionHandler: nil)
+
+
+        }
         
-        printController.printingItem = changedImg
-        printController.present(animated: true, completionHandler: nil)
+        ac.addAction(<#T##action: UIAlertAction##UIAlertAction#>)
+        ac.addAction(<#T##action: UIAlertAction##UIAlertAction#>)
+        ac.addAction(presentPrintController)
+        present(ac, animated: true)
+
 
         
     }
+    
     
     
     func imageResize(croppingImageView: UIImageView, viewSize: CGSize) -> UIImage {
@@ -88,8 +102,8 @@ class ExportController: UIViewController, UIPrintInteractionControllerDelegate, 
             }
         }
         
-        let rederedImage = newView.asImage()
-        return rederedImage
+        let renderedImage = newView.asImage()
+        return renderedImage
         
     }
     
