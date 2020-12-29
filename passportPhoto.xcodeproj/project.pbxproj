@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		98042487259BD400003343D2 /* SelectCountryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98042486259BD400003343D2 /* SelectCountryViewController.swift */; };
+		98042489259BD5B4003343D2 /* DocTypeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98042488259BD5B4003343D2 /* DocTypeViewController.swift */; };
 		98261552258FBBD200100168 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98261551258FBBD200100168 /* AppDelegate.swift */; };
 		98261554258FBBD200100168 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98261553258FBBD200100168 /* SceneDelegate.swift */; };
 		98261556258FBBD200100168 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98261555258FBBD200100168 /* ViewController.swift */; };
@@ -19,6 +21,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		98042486259BD400003343D2 /* SelectCountryViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectCountryViewController.swift; sourceTree = "<group>"; };
+		98042488259BD5B4003343D2 /* DocTypeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DocTypeViewController.swift; sourceTree = "<group>"; };
 		9826154E258FBBD200100168 /* passportPhoto.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = passportPhoto.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		98261551258FBBD200100168 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		98261553258FBBD200100168 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -74,6 +78,8 @@
 				98261553258FBBD200100168 /* SceneDelegate.swift */,
 				98261555258FBBD200100168 /* ViewController.swift */,
 				986C737E258FD41C003D97D9 /* ExportController.swift */,
+				98042486259BD400003343D2 /* SelectCountryViewController.swift */,
+				98042488259BD5B4003343D2 /* DocTypeViewController.swift */,
 				98261557258FBBD200100168 /* Main.storyboard */,
 				9826155A258FBBD500100168 /* Assets.xcassets */,
 				9826155C258FBBD500100168 /* LaunchScreen.storyboard */,
@@ -177,6 +183,8 @@
 				98261552258FBBD200100168 /* AppDelegate.swift in Sources */,
 				986C737F258FD41C003D97D9 /* ExportController.swift in Sources */,
 				98261554258FBBD200100168 /* SceneDelegate.swift in Sources */,
+				98042487259BD400003343D2 /* SelectCountryViewController.swift in Sources */,
+				98042489259BD5B4003343D2 /* DocTypeViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

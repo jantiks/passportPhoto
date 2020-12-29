@@ -97,17 +97,21 @@ class ImportController: UIViewController, UIImagePickerControllerDelegate, UINav
         
     }
     
+    
     func cropViewControllerDidCancel(_ cropViewController: CropViewController, original: UIImage) {
         dismiss(animated: true)
     }
     
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
-
+        dismiss(animated: true)
+        if let svc = self.storyboard?.instantiateViewController(withIdentifier: "selectCountry") as? SelectCountryViewController {
+            self.present(svc, animated: true)
+        }
         guard let image = info[.originalImage] as? UIImage else { return }
         
         currentImage = image
         
-        dismiss(animated: true)
+        
         if let image = currentImage {
             
             let cropController = Mantis.cropViewController(image: image)

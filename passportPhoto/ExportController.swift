@@ -31,6 +31,7 @@ class ExportController: UIViewController, UIPrintInteractionControllerDelegate, 
     override func viewDidLoad() {
         super.viewDidLoad()
         toolbarPickerView.isHidden = true
+        
         pickerView.delegate = self
         let doneButton = UIBarButtonItem(barButtonSystemItem: .done, target: self, action: #selector(doneTapped))
         toolbar.setItems([doneButton], animated: true)
