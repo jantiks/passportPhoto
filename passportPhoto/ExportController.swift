@@ -13,6 +13,7 @@ class ExportController: UIViewController, UIPrintInteractionControllerDelegate, 
     @IBOutlet var cropAgainButton: UIButton!
     @IBOutlet var downloadButton: UIButton!
     @IBOutlet var printButton: UIButton!
+    var picker: UIPickerView!
     let coutNumbers = [1,2,3,4,5,6,7,8,9,10,11,12]
     var croppedImage: UIImage?
     var sizeArr = [(width: Double, height: Double)]()
@@ -104,18 +105,30 @@ class ExportController: UIViewController, UIPrintInteractionControllerDelegate, 
             self.present(paperSheet, animated: true)
         }
         
+        //uipickerview
+        
         let quantity = UIAlertAction(title: "Quantity", style: .default) {
             [weak self] action in
             guard let self = self else { return }
-            let picker = UIPickerView()
-            picker.delegate = self
-            picker.translatesAutoresizingMaskIntoConstraints = false
-            picker.backgroundColor = .lightGray
+            self.picker = UIPickerView()
+            self.picker.delegate = self
+            self.picker.translatesAutoresizingMaskIntoConstraints = false
+            self.picker.backgroundColor = .lightGray
             UIView.transition(with: self.view, duration: 0.2, options: [.transitionCrossDissolve], animations: {
-              self.view.addSubview(picker)
+                self.view.addSubview(self.picker)
             }, completion: nil)
         
-            NSLayoutConstraint.activate([picker.bottomAnchor.constraint(equalTo: self.view.layoutMarginsGuide.bottomAnchor, constant: 0),picker.centerXAnchor.constraint(equalTo: self.view.layoutMarginsGuide.centerXAnchor, constant: 0) , picker.widthAnchor.constraint(equalTo: self.view.layoutMarginsGuide.widthAnchor, multiplier: 2)])
+            NSLayoutConstraint.activate([self.picker.bottomAnchor.constraint(equalTo: self.view.layoutMarginsGuide.bottomAnchor, constant: 0),self.picker.centerXAnchor.constraint(equalTo: self.view.layoutMarginsGuide.centerXAnchor, constant: 0) , self.picker.widthAnchor.constraint(equalTo: self.view.layoutMarginsGuide.widthAnchor, multiplier: 1)])
+            let toolbar = UIToolbar(frame: CGRect(x: 0, y: 0, width: self.view.frame.size.width, height: 40))
+            toolbar.barStyle = UIBarStyle.black
+            toolbar.isTranslucent = true
+            toolbar.sizeToFit()
+            
+            let doneButton = UIBarButtonItem(barButtonSystemItem: .done, target: self, action: #selector(self.donePicker))
+            
+            toolbar.setItems([doneButton], animated: true)
+            toolbar.isUserInteractionEnabled = true
+            self.picker.addSubview(toolbar)
             
         }
         
@@ -144,6 +157,10 @@ class ExportController: UIViewController, UIPrintInteractionControllerDelegate, 
 
 
         
+    }
+    @objc func donePicker() {
+        print("done")
+        picker.resignFirstResponder()
     }
     
     func numberOfComponents(in pickerView: UIPickerView) -> Int {
