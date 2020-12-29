@@ -8,22 +8,32 @@
 
 import UIKit
 
-class ExportController: UIViewController, UIPrintInteractionControllerDelegate, UINavigationControllerDelegate, UIPickerViewDelegate, UIPickerViewDataSource {
+class ExportController: UIViewController, UIPrintInteractionControllerDelegate, UINavigationControllerDelegate, UIPickerViewDelegate, UIPickerViewDataSource, UIToolbarDelegate {
     
     @IBOutlet var cropAgainButton: UIButton!
     @IBOutlet var downloadButton: UIButton!
     @IBOutlet var printButton: UIButton!
-    var picker: UIPickerView!
+    @IBOutlet var pickerView: UIPickerView!
+    @IBOutlet var toolbar: UIToolbar!
+    @IBOutlet var toolbarPickerView: UIView!
+    
+    
     let coutNumbers = [1,2,3,4,5,6,7,8,9,10,11,12]
     var croppedImage: UIImage?
     var sizeArr = [(width: Double, height: Double)]()
     var paperSize = CGSize(width: 2480, height: 3505) //a4 paper size in pixeles
+    var acTitle = "Paper and Quantity"
+    var paperType = "A4"
     var photoCount = 6
     var printedImages = 0
     
     @IBOutlet var imageView: UIImageView!
     override func viewDidLoad() {
         super.viewDidLoad()
+        toolbarPickerView.isHidden = true
+        pickerView.delegate = self
+        let doneButton = UIBarButtonItem(barButtonSystemItem: .done, target: self, action: #selector(doneTapped))
+        toolbar.setItems([doneButton], animated: true)
         
         cropAgainButton.layer.borderWidth = 3
         cropAgainButton.layer.cornerRadius = 5
@@ -55,11 +65,21 @@ class ExportController: UIViewController, UIPrintInteractionControllerDelegate, 
     }
     
     @IBAction func printTapped(_ sender: Any) {
-        
+        callAc()
+    }
+    
+    @objc func doneTapped() {
+        print("done")
+        toolbarPickerView.isHidden = true
+        acTitle = "Paper is \(paperType) : photo count is \(self.photoCount)"
+        callAc()
+    }
+    
+    func callAc() {
         guard let img = imageView else { return }
-        var paperType = ""
         
-        var acTitle = "Paper and Quantity"
+        
+        
         let ac = UIAlertController(title: acTitle, message: "Choose paper type and number of photos", preferredStyle: .alert)
         let choosePaper = UIAlertAction(title: "Paper", style: .default) {
             [weak ac, weak self] action in
@@ -71,29 +91,29 @@ class ExportController: UIViewController, UIPrintInteractionControllerDelegate, 
             
             
             let a4 = UIAlertAction(title: "A4 8.3 x 11.7 in", style: .default) { action in
-                paperType = "A4"
+                self.paperType = "A4"
                 let a2Width = 2480
                 let a2Height = 3505
                 
-                ac.title = "Paper is \(paperType) : photo count is \(self.photoCount)"
+                ac.title = "Paper is \(self.paperType) : photo count is \(self.photoCount)"
                 self.paperSize = CGSize(width: a2Width, height: a2Height)
                 self.present(ac, animated: true)
             }
             let a5 = UIAlertAction(title: "A5 5.8 x 8.3 in", style: .default) { action in
-                paperType = "A5"
+                self.paperType = "A5"
                 let a2Width = 1746
                 let a2Height = 2480
                 
-                ac.title = "Paper is \(paperType) : photo count is \(self.photoCount)"
+                ac.title = "Paper is \(self.paperType) : photo count is \(self.photoCount)"
                 self.paperSize = CGSize(width: a2Width, height: a2Height)
                 self.present(ac, animated: true)
             }
             let a6 = UIAlertAction(title: "A6 4.1 x 5.8 in", style: .default) { action in
-                paperType = "A6"
+                self.paperType = "A6"
                 let a2Width = 1239
                 let a2Height = 1746
                 
-                ac.title = "Paper is \(paperType) : photo count is \(self.photoCount)"
+                ac.title = "Paper is \(self.paperType) : photo count is \(self.photoCount)"
                 self.paperSize = CGSize(width: a2Width, height: a2Height)
                 self.present(ac, animated: true)
             }
@@ -110,28 +130,9 @@ class ExportController: UIViewController, UIPrintInteractionControllerDelegate, 
         let quantity = UIAlertAction(title: "Quantity", style: .default) {
             [weak self] action in
             guard let self = self else { return }
-            self.picker = UIPickerView()
-            self.picker.delegate = self
-            self.picker.translatesAutoresizingMaskIntoConstraints = false
-            self.picker.backgroundColor = .lightGray
-            UIView.transition(with: self.view, duration: 0.2, options: [.transitionCrossDissolve], animations: {
-                self.view.addSubview(self.picker)
-            }, completion: nil)
-        
-            NSLayoutConstraint.activate([self.picker.bottomAnchor.constraint(equalTo: self.view.layoutMarginsGuide.bottomAnchor, constant: 0),self.picker.centerXAnchor.constraint(equalTo: self.view.layoutMarginsGuide.centerXAnchor, constant: 0) , self.picker.widthAnchor.constraint(equalTo: self.view.layoutMarginsGuide.widthAnchor, multiplier: 1)])
-            let toolbar = UIToolbar(frame: CGRect(x: 0, y: 0, width: self.view.frame.size.width, height: 40))
-            toolbar.barStyle = UIBarStyle.black
-            toolbar.isTranslucent = true
-            toolbar.sizeToFit()
-            
-            let doneButton = UIBarButtonItem(barButtonSystemItem: .done, target: self, action: #selector(self.donePicker))
-            
-            toolbar.setItems([doneButton], animated: true)
-            toolbar.isUserInteractionEnabled = true
-            self.picker.addSubview(toolbar)
-            
+            self.toolbarPickerView.isHidden = false
+
         }
-        
         
         //print controller
         let presentPrintController = UIAlertAction(title: "Print", style: .default){ [weak self] action in
@@ -142,7 +143,7 @@ class ExportController: UIViewController, UIPrintInteractionControllerDelegate, 
             let printInfo = UIPrintInfo.printInfo()
             
             printController.printInfo = printInfo
-            let  changedImg = self.imageResize(croppingImageView: img, viewSize: self.paperSize)
+            let changedImg = self.imageResize(croppingImageView: img, viewSize: self.paperSize)
 
             printController.printingItems = [changedImg]
             printController.present(animated: true, completionHandler: nil)
@@ -156,11 +157,6 @@ class ExportController: UIViewController, UIPrintInteractionControllerDelegate, 
         present(ac, animated: true)
 
 
-        
-    }
-    @objc func donePicker() {
-        print("done")
-        picker.resignFirstResponder()
     }
     
     func numberOfComponents(in pickerView: UIPickerView) -> Int {
@@ -173,6 +169,9 @@ class ExportController: UIViewController, UIPrintInteractionControllerDelegate, 
     
     func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
         return "\(coutNumbers[row])"
+    }
+    func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
+        photoCount = row + 1
     }
     
     

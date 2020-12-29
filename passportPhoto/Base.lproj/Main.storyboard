@@ -227,6 +227,29 @@
                                     <constraint firstItem="hFw-kC-3e8" firstAttribute="width" secondItem="gfj-mJ-wN9" secondAttribute="height" multiplier="80:21" id="l7x-GD-RZh"/>
                                 </constraints>
                             </stackView>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="wSj-Xe-OCH">
+                                <rect key="frame" x="0.0" y="603" width="414" height="210"/>
+                                <subviews>
+                                    <pickerView contentMode="scaleToFill" verticalCompressionResistancePriority="749" translatesAutoresizingMaskIntoConstraints="NO" id="58e-Jo-Kjo">
+                                        <rect key="frame" x="0.0" y="44" width="414" height="166"/>
+                                    </pickerView>
+                                    <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="G69-U0-JWX">
+                                        <rect key="frame" x="0.0" y="0.0" width="414" height="44"/>
+                                        <items/>
+                                    </toolbar>
+                                </subviews>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="210" id="8Pp-ME-2XK"/>
+                                    <constraint firstItem="58e-Jo-Kjo" firstAttribute="top" secondItem="G69-U0-JWX" secondAttribute="bottom" id="e3o-Bq-1yC"/>
+                                    <constraint firstItem="G69-U0-JWX" firstAttribute="leading" secondItem="wSj-Xe-OCH" secondAttribute="leading" id="eTy-cR-lgz"/>
+                                    <constraint firstItem="58e-Jo-Kjo" firstAttribute="leading" secondItem="wSj-Xe-OCH" secondAttribute="leading" id="fmT-NU-gXz"/>
+                                    <constraint firstItem="G69-U0-JWX" firstAttribute="top" secondItem="wSj-Xe-OCH" secondAttribute="top" id="hoa-zA-WLt"/>
+                                    <constraint firstAttribute="bottom" secondItem="58e-Jo-Kjo" secondAttribute="bottom" id="oz0-J8-KUZ"/>
+                                    <constraint firstAttribute="trailing" secondItem="58e-Jo-Kjo" secondAttribute="trailing" id="qlf-GA-KkO"/>
+                                    <constraint firstAttribute="trailing" secondItem="G69-U0-JWX" secondAttribute="trailing" id="wLH-H4-eGP"/>
+                                </constraints>
+                            </view>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
@@ -236,8 +259,11 @@
                             <constraint firstItem="qaI-fM-jkA" firstAttribute="centerX" secondItem="QJL-4y-hYY" secondAttribute="centerX" id="aKg-g2-rEx"/>
                             <constraint firstItem="fT9-De-JUt" firstAttribute="trailing" secondItem="QJL-4y-hYY" secondAttribute="trailing" id="dXy-Vr-WCy"/>
                             <constraint firstItem="fT9-De-JUt" firstAttribute="centerX" secondItem="QJL-4y-hYY" secondAttribute="centerX" id="ejM-mI-36U"/>
+                            <constraint firstItem="wSj-Xe-OCH" firstAttribute="bottom" secondItem="QJL-4y-hYY" secondAttribute="bottom" id="fab-y2-oDG"/>
                             <constraint firstItem="QJL-4y-hYY" firstAttribute="bottom" secondItem="CKH-Fr-Nwd" secondAttribute="bottom" constant="1" id="gWc-Lo-CUp"/>
+                            <constraint firstItem="wSj-Xe-OCH" firstAttribute="trailing" secondItem="QJL-4y-hYY" secondAttribute="trailing" id="n6S-h7-xRv"/>
                             <constraint firstItem="qaI-fM-jkA" firstAttribute="top" secondItem="QJL-4y-hYY" secondAttribute="top" constant="40" id="ru9-2f-Mff"/>
+                            <constraint firstItem="wSj-Xe-OCH" firstAttribute="leading" secondItem="QJL-4y-hYY" secondAttribute="leading" id="wuC-HV-bbi"/>
                             <constraint firstItem="CKH-Fr-Nwd" firstAttribute="top" relation="greaterThanOrEqual" secondItem="fT9-De-JUt" secondAttribute="bottom" constant="10" id="xQu-MR-0XN"/>
                             <constraint firstItem="fT9-De-JUt" firstAttribute="top" relation="lessThanOrEqual" secondItem="qaI-fM-jkA" secondAttribute="bottom" constant="102" id="yol-u4-WZk"/>
                         </constraints>
@@ -248,7 +274,10 @@
                         <outlet property="cropAgainButton" destination="gfj-mJ-wN9" id="yzH-bD-hLr"/>
                         <outlet property="downloadButton" destination="8Vd-QX-Q06" id="Uwn-Xo-62j"/>
                         <outlet property="imageView" destination="m82-jw-dS7" id="7sH-Fy-k5n"/>
+                        <outlet property="pickerView" destination="58e-Jo-Kjo" id="afd-LH-mlg"/>
                         <outlet property="printButton" destination="hFw-kC-3e8" id="BOH-Nd-Qfy"/>
+                        <outlet property="toolbar" destination="G69-U0-JWX" id="49s-As-IG0"/>
+                        <outlet property="toolbarPickerView" destination="wSj-Xe-OCH" id="O7L-D3-RIo"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="vOt-KC-RcY" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
