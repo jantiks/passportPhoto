@@ -10,7 +10,7 @@
         <!--Item-->
         <scene sceneID="tne-QT-ifu">
             <objects>
-                <viewController id="BYZ-38-t0r" customClass="ImportController" customModule="passportPhoto" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="Main" modalPresentationStyle="fullScreen" id="BYZ-38-t0r" customClass="ImportController" customModule="passportPhoto" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -152,16 +152,16 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="2" translatesAutoresizingMaskIntoConstraints="NO" id="ghl-ar-q06">
-                                <rect key="frame" x="27" y="63" width="360" height="115"/>
+                                <rect key="frame" x="10" y="63" width="394" height="115"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Select " textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ug1-Bi-Y3v">
-                                        <rect key="frame" x="110.5" y="0.0" width="139.5" height="56.5"/>
+                                        <rect key="frame" x="127.5" y="0.0" width="139.5" height="56.5"/>
                                         <fontDescription key="fontDescription" name="AppleSDGothicNeo-Bold" family="Apple SD Gothic Neo" pointSize="47"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Document type" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="H34-3e-k1q">
-                                        <rect key="frame" x="18.5" y="58.5" width="323" height="56.5"/>
+                                        <rect key="frame" x="35.5" y="58.5" width="323" height="56.5"/>
                                         <fontDescription key="fontDescription" name="AppleSDGothicNeo-Bold" family="Apple SD Gothic Neo" pointSize="47"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
@@ -169,7 +169,7 @@
                                 </subviews>
                             </stackView>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="yiC-e8-3ym">
-                                <rect key="frame" x="0.0" y="207" width="414" height="689"/>
+                                <rect key="frame" x="0.0" y="207" width="414" height="600"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                                 <color key="separatorColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <prototypes>
@@ -187,24 +187,42 @@
                                     <outlet property="delegate" destination="Im4-S6-B3b" id="vEA-py-dzo"/>
                                 </connections>
                             </tableView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="R1M-Md-KrY">
+                                <rect key="frame" x="20" y="815" width="374" height="39"/>
+                                <color key="backgroundColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="22"/>
+                                <state key="normal" title="Back">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                </state>
+                                <connections>
+                                    <action selector="backtapped:" destination="9HH-QN-3Xc" eventType="touchUpInside" id="h27-b8-bQR"/>
+                                    <action selector="buttonTapped:" destination="Im4-S6-B3b" eventType="touchUpInside" id="0ps-7P-u6C"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <constraints>
-                            <constraint firstAttribute="bottom" secondItem="yiC-e8-3ym" secondAttribute="bottom" id="0Te-nI-9ob"/>
                             <constraint firstItem="yiC-e8-3ym" firstAttribute="top" secondItem="ghl-ar-q06" secondAttribute="bottom" constant="29" id="0gm-Gt-lDj"/>
                             <constraint firstItem="ghl-ar-q06" firstAttribute="top" secondItem="RcQ-SX-fjG" secondAttribute="top" constant="19" id="33Y-R6-9dv"/>
+                            <constraint firstItem="RcQ-SX-fjG" firstAttribute="trailing" secondItem="R1M-Md-KrY" secondAttribute="trailing" constant="20" id="6ua-DL-2lp"/>
                             <constraint firstItem="yiC-e8-3ym" firstAttribute="leading" secondItem="RcQ-SX-fjG" secondAttribute="leading" id="8GC-cK-44k"/>
-                            <constraint firstItem="ghl-ar-q06" firstAttribute="leading" secondItem="RcQ-SX-fjG" secondAttribute="leading" constant="27" id="e20-KP-FVd"/>
-                            <constraint firstItem="RcQ-SX-fjG" firstAttribute="trailing" secondItem="ghl-ar-q06" secondAttribute="trailing" constant="27" id="hyp-L3-Qhl"/>
+                            <constraint firstItem="RcQ-SX-fjG" firstAttribute="bottom" secondItem="R1M-Md-KrY" secondAttribute="bottom" constant="8" id="M8x-ET-vpI"/>
+                            <constraint firstItem="R1M-Md-KrY" firstAttribute="leading" secondItem="RcQ-SX-fjG" secondAttribute="leading" constant="20" id="aRE-IP-TeU"/>
+                            <constraint firstItem="ghl-ar-q06" firstAttribute="leading" secondItem="RcQ-SX-fjG" secondAttribute="leading" constant="10" id="e20-KP-FVd"/>
+                            <constraint firstItem="R1M-Md-KrY" firstAttribute="top" secondItem="yiC-e8-3ym" secondAttribute="bottom" constant="8" id="gFr-CP-5GW"/>
+                            <constraint firstItem="RcQ-SX-fjG" firstAttribute="trailing" secondItem="ghl-ar-q06" secondAttribute="trailing" constant="10" id="hyp-L3-Qhl"/>
                             <constraint firstItem="yiC-e8-3ym" firstAttribute="trailing" secondItem="RcQ-SX-fjG" secondAttribute="trailing" id="zkg-El-U64"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="RcQ-SX-fjG"/>
                     </view>
                     <navigationItem key="navigationItem" id="OVZ-f2-TJV"/>
+                    <connections>
+                        <outlet property="backButton" destination="R1M-Md-KrY" id="QPv-iE-flv"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Ctp-tm-EPb" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1808.6956521739132" y="1666.7410714285713"/>
+            <point key="canvasLocation" x="1949" y="1667"/>
         </scene>
         <!--Select Country View Controller-->
         <scene sceneID="oze-sG-BK7">
@@ -215,7 +233,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="YIV-Vl-Z5v">
-                                <rect key="frame" x="0.0" y="211" width="414" height="685"/>
+                                <rect key="frame" x="0.0" y="211" width="414" height="594"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                                 <color key="separatorColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <inset key="separatorInset" minX="15" minY="0.0" maxX="0.0" maxY="0.0"/>
@@ -244,27 +262,43 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="mut-dd-Rt6">
+                                <rect key="frame" x="20" y="815" width="374" height="39"/>
+                                <color key="backgroundColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="22"/>
+                                <state key="normal" title="Back">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                </state>
+                                <connections>
+                                    <action selector="backtapped:" destination="9HH-QN-3Xc" eventType="touchUpInside" id="5iG-Ik-s3X"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <constraints>
-                            <constraint firstAttribute="bottom" secondItem="YIV-Vl-Z5v" secondAttribute="bottom" id="9aX-3S-5V4"/>
+                            <constraint firstItem="mut-dd-Rt6" firstAttribute="leading" secondItem="SWE-vQ-zOF" secondAttribute="leading" constant="20" id="5o5-6D-YNh"/>
+                            <constraint firstItem="SWE-vQ-zOF" firstAttribute="bottom" secondItem="mut-dd-Rt6" secondAttribute="bottom" constant="8" id="7ar-u6-vz8"/>
                             <constraint firstItem="gTr-i2-SE7" firstAttribute="centerX" secondItem="SWE-vQ-zOF" secondAttribute="centerX" id="CN0-Zq-zt4"/>
                             <constraint firstItem="YIV-Vl-Z5v" firstAttribute="centerX" secondItem="SWE-vQ-zOF" secondAttribute="centerX" id="D2K-ch-crJ"/>
+                            <constraint firstItem="mut-dd-Rt6" firstAttribute="top" secondItem="YIV-Vl-Z5v" secondAttribute="bottom" constant="10" id="Nlh-Uh-fcM"/>
                             <constraint firstItem="YIV-Vl-Z5v" firstAttribute="top" secondItem="gTr-i2-SE7" secondAttribute="bottom" constant="29" id="dvF-Kn-e3p"/>
                             <constraint firstItem="YIV-Vl-Z5v" firstAttribute="trailing" secondItem="SWE-vQ-zOF" secondAttribute="trailing" id="fFZ-2Q-EuY"/>
                             <constraint firstItem="gTr-i2-SE7" firstAttribute="top" secondItem="SWE-vQ-zOF" secondAttribute="top" constant="19" id="k7N-Fl-UP4"/>
                             <constraint firstItem="YIV-Vl-Z5v" firstAttribute="leading" secondItem="SWE-vQ-zOF" secondAttribute="leading" id="mHN-3P-9iM"/>
+                            <constraint firstItem="mut-dd-Rt6" firstAttribute="centerX" secondItem="SWE-vQ-zOF" secondAttribute="centerX" id="n9U-r8-5Gu"/>
+                            <constraint firstItem="SWE-vQ-zOF" firstAttribute="trailing" secondItem="mut-dd-Rt6" secondAttribute="trailing" constant="20" id="y3e-FY-QFt"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="SWE-vQ-zOF"/>
                     </view>
                     <navigationItem key="navigationItem" id="Ml2-Hx-3TP"/>
                     <connections>
+                        <outlet property="backButton" destination="mut-dd-Rt6" id="Qob-YA-TGY"/>
                         <outlet property="tableView" destination="YIV-Vl-Z5v" id="Ssh-CD-nsM"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="yX4-T3-j4H" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="871" y="1667"/>
+            <point key="canvasLocation" x="869.56521739130437" y="1666.7410714285713"/>
         </scene>
         <!--Export-->
         <scene sceneID="vht-jM-agT">

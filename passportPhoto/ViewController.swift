@@ -10,7 +10,11 @@ import UIKit
 import Mantis
 import SwiftSoup
 
-class ImportController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate,CropViewControllerDelegate {
+class ImportController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate, CropViewControllerDelegate {
+    func cropViewControllerDidCrop(_ cropViewController: CropViewController, cropped: UIImage, transformation: Transformation) {
+        dismiss(animated: true, completion: nil)
+    }
+    
     
     
     var currentImage: UIImage?
@@ -48,16 +52,21 @@ class ImportController: UIViewController, UIImagePickerControllerDelegate, UINav
                         
                         guard let countries = try? td[0].text() else { continue }
                         
-                        
                         let widthArr = sizeText.split(separator: "x")
                         let heightArr = widthArr[1].split(separator: " ")
+                        var sizeType = ""
+                        if heightArr.count == 2 {
+                            sizeType = String(heightArr[1])
+                        } else {
+                            sizeType = "cm"
+                        }
                         
                         
                         
                         guard let width = Double(widthArr[0]) else { continue }
                         guard let height = Double(heightArr[0]) else { continue }
                         
-                        self?.aspecRatios.append((width: width, height: height, name: ratioName, sizeType: "vzgo"))
+                        self?.aspecRatios.append((width: width, height: height, name: ratioName, sizeType: sizeType ))
                         if !countries.isEmpty {
                             self?.countries.append(countries)
                         }
@@ -103,42 +112,19 @@ class ImportController: UIViewController, UIImagePickerControllerDelegate, UINav
     }
     
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
+        guard let image = info[.originalImage] as? UIImage else { return }
         dismiss(animated: true)
         if let svc = self.storyboard?.instantiateViewController(withIdentifier: "selectCountry") as? SelectCountryViewController {
+            svc.countries = countries
+            svc.aspecRatios = aspecRatios
+            svc.selectedImage = image
             self.present(svc, animated: true)
         }
-        guard let image = info[.originalImage] as? UIImage else { return }
+        
         
         currentImage = image
         
         
-        if let image = currentImage {
-            
-            let cropController = Mantis.cropViewController(image: image)
-            cropController.delegate = self
-            
-            var configure = Mantis.Config()
-            
-            DispatchQueue.global(qos: .userInitiated).async {
-                [weak self] in
-                guard let self = self else { return }
-                
-                for i in 0..<self.aspecRatios.count {
-                    let line = self.aspecRatios[i]
-                    configure.addCustomRatio(byHorizontalWidth: line.width, andHorizontalHeight: line.height, name: line.name)
-                }
-                configure.addCountries(country: self.countries)
-            }
-            
-            
-            
-            DispatchQueue.main.async {
-                [weak self] in
-                cropController.config = configure
-                self?.present(cropController, animated: true)
-            }
-            
-        }
         
     }
     

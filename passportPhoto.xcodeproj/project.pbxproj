@@ -15,9 +15,9 @@
 		98261559258FBBD200100168 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 98261557258FBBD200100168 /* Main.storyboard */; };
 		9826155B258FBBD500100168 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9826155A258FBBD500100168 /* Assets.xcassets */; };
 		9826155E258FBBD500100168 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9826155C258FBBD500100168 /* LaunchScreen.storyboard */; };
-		984D7D812598792D0052EC29 /* Mantis in Frameworks */ = {isa = PBXBuildFile; productRef = 984D7D802598792D0052EC29 /* Mantis */; };
 		984D7D8425988FFA0052EC29 /* SwiftSoup in Frameworks */ = {isa = PBXBuildFile; productRef = 984D7D8325988FFA0052EC29 /* SwiftSoup */; };
 		986C737F258FD41C003D97D9 /* ExportController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 986C737E258FD41C003D97D9 /* ExportController.swift */; };
+		98BB24DF259C9378008D3766 /* Mantis in Frameworks */ = {isa = PBXBuildFile; productRef = 98BB24DE259C9378008D3766 /* Mantis */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -39,7 +39,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				984D7D812598792D0052EC29 /* Mantis in Frameworks */,
+				98BB24DF259C9378008D3766 /* Mantis in Frameworks */,
 				984D7D8425988FFA0052EC29 /* SwiftSoup in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -77,9 +77,9 @@
 				98261551258FBBD200100168 /* AppDelegate.swift */,
 				98261553258FBBD200100168 /* SceneDelegate.swift */,
 				98261555258FBBD200100168 /* ViewController.swift */,
-				986C737E258FD41C003D97D9 /* ExportController.swift */,
 				98042486259BD400003343D2 /* SelectCountryViewController.swift */,
 				98042488259BD5B4003343D2 /* DocTypeViewController.swift */,
+				986C737E258FD41C003D97D9 /* ExportController.swift */,
 				98261557258FBBD200100168 /* Main.storyboard */,
 				9826155A258FBBD500100168 /* Assets.xcassets */,
 				9826155C258FBBD500100168 /* LaunchScreen.storyboard */,
@@ -105,8 +105,8 @@
 			);
 			name = passportPhoto;
 			packageProductDependencies = (
-				984D7D802598792D0052EC29 /* Mantis */,
 				984D7D8325988FFA0052EC29 /* SwiftSoup */,
+				98BB24DE259C9378008D3766 /* Mantis */,
 			);
 			productName = passportPhoto;
 			productReference = 9826154E258FBBD200100168 /* passportPhoto.app */;
@@ -149,8 +149,8 @@
 			);
 			mainGroup = 98261545258FBBD200100168;
 			packageReferences = (
-				984D7D7F2598792D0052EC29 /* XCRemoteSwiftPackageReference "CropVC" */,
 				984D7D8225988FFA0052EC29 /* XCRemoteSwiftPackageReference "SwiftSoup" */,
+				98BB24DD259C9378008D3766 /* XCRemoteSwiftPackageReference "Mantis" */,
 			);
 			productRefGroup = 9826154F258FBBD200100168 /* Products */;
 			projectDirPath = "";
@@ -382,14 +382,6 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
-		984D7D7F2598792D0052EC29 /* XCRemoteSwiftPackageReference "CropVC" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "git@github.com:jantiks/CropVC.git";
-			requirement = {
-				branch = master;
-				kind = branch;
-			};
-		};
 		984D7D8225988FFA0052EC29 /* XCRemoteSwiftPackageReference "SwiftSoup" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/scinfu/SwiftSoup";
@@ -398,18 +390,26 @@
 				minimumVersion = 2.3.2;
 			};
 		};
+		98BB24DD259C9378008D3766 /* XCRemoteSwiftPackageReference "Mantis" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/guoyingtao/Mantis";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 1.4.7;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
-		984D7D802598792D0052EC29 /* Mantis */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 984D7D7F2598792D0052EC29 /* XCRemoteSwiftPackageReference "CropVC" */;
-			productName = Mantis;
-		};
 		984D7D8325988FFA0052EC29 /* SwiftSoup */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = 984D7D8225988FFA0052EC29 /* XCRemoteSwiftPackageReference "SwiftSoup" */;
 			productName = SwiftSoup;
+		};
+		98BB24DE259C9378008D3766 /* Mantis */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 98BB24DD259C9378008D3766 /* XCRemoteSwiftPackageReference "Mantis" */;
+			productName = Mantis;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};
