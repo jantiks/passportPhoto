@@ -46,7 +46,11 @@ class DocTypeViewController: UIViewController, UITableViewDelegate, UITableViewD
         
         if let image = currentImage {
             
+            let width = aspecRatios[indexPath.row].width
+            let height = aspecRatios[indexPath.row].height
+            
             let cropController = Mantis.cropViewController(image: image)
+            cropController.config.presetFixedRatioType = .alwaysUsingOnePresetFixedRatio(ratio: width / height)
             cropController.delegate = self
             
             present(cropController, animated: true)
@@ -63,7 +67,11 @@ class DocTypeViewController: UIViewController, UITableViewDelegate, UITableViewD
     }
     
     func cropViewControllerDidCrop(_ cropViewController: CropViewController, cropped: UIImage, transformation: Transformation) {
-        let img = cropped
+        dismiss(animated: true, completion: nil)
+        if let svc = storyboard?.instantiateViewController(withIdentifier: "Export") as? ExportController {
+            svc.croppedImage = cropped
+            self.present(svc, animated: true)
+        }
     }
     
     func cropViewControllerDidCancel(_ cropViewController: CropViewController, original: UIImage) {

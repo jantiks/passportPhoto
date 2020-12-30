@@ -52,7 +52,7 @@ class ImportController: UIViewController, UIImagePickerControllerDelegate, UINav
                         
                         guard let countries = try? td[0].text() else { continue }
                         
-                        let widthArr = sizeText.split(separator: "x")
+                        let widthArr = sizeText.split(separator: "x", maxSplits: 1, omittingEmptySubsequences: true)
                         let heightArr = widthArr[1].split(separator: " ")
                         var sizeType = ""
                         if heightArr.count == 2 {
