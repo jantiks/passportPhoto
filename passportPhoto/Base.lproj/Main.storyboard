@@ -222,7 +222,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Ctp-tm-EPb" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1594" y="842"/>
+            <point key="canvasLocation" x="1592.753623188406" y="841.74107142857144"/>
         </scene>
         <!--Select Country View Controller-->
         <scene sceneID="oze-sG-BK7">

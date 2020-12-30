@@ -33,7 +33,10 @@ class DocTypeViewController: UIViewController, UITableViewDelegate, UITableViewD
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "docTypeCell", for: indexPath)
-        cell.textLabel?.text = "\(aspecRatios[indexPath.row].name) \(aspecRatios[indexPath.row].width):\(aspecRatios[indexPath.row].height) \(aspecRatios[indexPath.row].sizeType)"
+        let type = aspecRatios[indexPath.row].name.split(separator: " ", maxSplits: 1, omittingEmptySubsequences: true)
+        
+        cell.textLabel?.text = "\(type[1]) \(aspecRatios[indexPath.row].width):\(aspecRatios[indexPath.row].height) \(aspecRatios[indexPath.row].sizeType)"
+        cell.textLabel?.numberOfLines = 0
         return cell
     }
 

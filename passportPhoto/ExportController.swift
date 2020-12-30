@@ -203,8 +203,11 @@ class ExportController: UIViewController, UIPrintInteractionControllerDelegate, 
     
     
     @IBAction func cropAgainTapped(_ sender: Any) {
-        tabBarController?.tabBar.items?[1].isEnabled = false
-        tabBarController?.selectedIndex = 0
+        if let svc = storyboard?.instantiateViewController(withIdentifier: "Main") {
+            
+            present(svc, animated: true)
+            
+        }
     }
     
     
