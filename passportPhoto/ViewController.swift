@@ -7,15 +7,9 @@
 //
 
 import UIKit
-import Mantis
 import SwiftSoup
 
-class ImportController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate, CropViewControllerDelegate {
-    func cropViewControllerDidCrop(_ cropViewController: CropViewController, cropped: UIImage, transformation: Transformation) {
-        dismiss(animated: true, completion: nil)
-    }
-    
-    
+class ImportController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate {    
     
     var currentImage: UIImage?
     var aspecRatios = [(width: Double, height: Double, name: String, sizeType: String)]()
@@ -47,7 +41,7 @@ class ImportController: UIViewController, UIImagePickerControllerDelegate, UINav
                         let element = elements[i]
                         guard let td = try? element.select("td").array() else { continue }
                         
-                        guard let ratioName = try? td[1].text() else { continue }
+                        guard var ratioName = try? td[1].text() else { continue }
                         guard let sizeText = try? td[2].text() else { continue }
                         
                         guard let countries = try? td[0].text() else { continue }
@@ -61,6 +55,16 @@ class ImportController: UIViewController, UIImagePickerControllerDelegate, UINav
                             sizeType = "cm"
                         }
                         
+                        let problematicNames = ratioName.split(separator: " ", maxSplits: 1, omittingEmptySubsequences: true)
+                        if problematicNames[0].contains("US") {
+                            ratioName = "United States" + " " + problematicNames[1]
+                        } else if problematicNames[0].contains("UK") {
+                            ratioName = "United Kingdom" + " " + problematicNames[1]
+                        } else if problematicNames[0].contains("EU") {
+                            ratioName = "European Union" + " " + problematicNames[1]
+                        } else if problematicNames[0].contains("UAE") {
+                            ratioName = "United Arab Emirates" + " " + problematicNames[1]
+                        }
                         
                         
                         guard let width = Double(widthArr[0]) else { continue }
@@ -81,34 +85,6 @@ class ImportController: UIViewController, UIImagePickerControllerDelegate, UINav
         
     
          
-    }
-    
-    func cropViewControllerDidCrop(_ cropViewController: CropViewController, cropped: UIImage, transformation: Transformation, name: String) {
-        dismiss(animated: true)
-        let croppedImage = cropped
-        var sizeArr = [(width: Double,height: Double)]()
-        if !name.isEmpty {
-            sizeArr = definePixelOrCm(name: name)
-            print(name)
-        } else {
-            sizeArr = [(Double(transformation.scrollBounds.width),Double(transformation.scrollBounds.height))]
-        }
-        print(transformation.scrollBounds.height)
-        tabBarController?.viewControllers?.forEach({
-            if let controller = $0 as? ExportController {
-                controller.croppedImage = croppedImage
-                controller.sizeArr = sizeArr
-                tabBarController?.tabBar.items?[1].isEnabled = true
-                tabBarController?.selectedIndex = 1
-            }
-        })
-        
-        
-    }
-    
-    
-    func cropViewControllerDidCancel(_ cropViewController: CropViewController, original: UIImage) {
-        dismiss(animated: true)
     }
     
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {

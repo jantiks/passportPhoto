@@ -12,12 +12,9 @@ import Mantis
 
 class DocTypeViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, CropViewControllerDelegate {
     
-    
-    
-    
-    
     @IBOutlet var backButton: UIButton!
     var currentImage: UIImage?
+    var sizeArr = [(width: Double, height: Double)]()
     var aspecRatios = [(width: Double, height: Double, name: String, sizeType: String)]()
     
     override func viewDidLoad() {
@@ -33,9 +30,9 @@ class DocTypeViewController: UIViewController, UITableViewDelegate, UITableViewD
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "docTypeCell", for: indexPath)
-        let type = aspecRatios[indexPath.row].name.split(separator: " ", maxSplits: 1, omittingEmptySubsequences: true)
+//        let type = aspecRatios[indexPath.row].name.split(separator: " ", maxSplits: 1, omittingEmptySubsequences: true)
         
-        cell.textLabel?.text = "\(type[1]) \(aspecRatios[indexPath.row].width):\(aspecRatios[indexPath.row].height) \(aspecRatios[indexPath.row].sizeType)"
+        cell.textLabel?.text = "\(aspecRatios[indexPath.row].name) \(aspecRatios[indexPath.row].width):\(aspecRatios[indexPath.row].height) \(aspecRatios[indexPath.row].sizeType)"
         cell.textLabel?.numberOfLines = 0
         return cell
     }
@@ -47,10 +44,14 @@ class DocTypeViewController: UIViewController, UITableViewDelegate, UITableViewD
         cell?.selectedBackgroundView = backgroundView
         cell?.textLabel?.textColor = .white
         
+        
+        
         if let image = currentImage {
             
             let width = aspecRatios[indexPath.row].width
             let height = aspecRatios[indexPath.row].height
+            
+            sizeArr = [(width * 118, height * 118)]
             
             let cropController = Mantis.cropViewController(image: image)
             cropController.config.presetFixedRatioType = .alwaysUsingOnePresetFixedRatio(ratio: width / height)
@@ -73,6 +74,7 @@ class DocTypeViewController: UIViewController, UITableViewDelegate, UITableViewD
         dismiss(animated: true, completion: nil)
         if let svc = storyboard?.instantiateViewController(withIdentifier: "Export") as? ExportController {
             svc.croppedImage = cropped
+            svc.sizeArr = sizeArr
             self.present(svc, animated: true)
         }
     }
