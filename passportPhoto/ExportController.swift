@@ -148,15 +148,19 @@ class ExportController: UIViewController, UIPrintInteractionControllerDelegate, 
         let presentPrintController = UIAlertAction(title: "Print", style: .default){ [weak self] action in
             guard let self = self else { return }
             let loadView = UIView()
+            let label = UILabel(frame: CGRect(x: 30, y: 55, width: 70, height: 20))
+            label.text = "Loading"
+            label.textColor = .systemGray
             
 
-            loadView.frame = CGRect(x: (self.view.bounds.width / 2) - 60, y: (self.view.frame.height / 2) - 30, width: 120, height: 60)
+            loadView.frame = CGRect(x: (self.view.bounds.width / 2) - 60, y: (self.view.frame.height / 2) - 30, width: 120, height: 80)
             loadView.backgroundColor = .white
-            loadView.layer.cornerRadius = 30
+            loadView.layer.cornerRadius = 10
             
             let spiner = SpinnerView(frame: CGRect(x: 40, y: 10, width: 40, height: 40))
 
             loadView.addSubview(spiner)
+            loadView.addSubview(label)
             self.view.addSubview(loadView)
             
 
