@@ -151,7 +151,7 @@ class ExportController: UIViewController, UIPrintInteractionControllerDelegate, 
             
 
             loadView.frame = CGRect(x: (self.view.bounds.width / 2) - 60, y: (self.view.frame.height / 2) - 30, width: 120, height: 60)
-            loadView.backgroundColor = .systemBlue
+            loadView.backgroundColor = .white
             loadView.layer.cornerRadius = 30
             
             let spiner = SpinnerView(frame: CGRect(x: 40, y: 10, width: 40, height: 40))
@@ -366,7 +366,7 @@ class SpinnerView : UIView {
     }
 
     func animateStrokeHueWithDuration(duration: CFTimeInterval) {
-        let count = 36
+        let count = 2
         let animation = CAKeyframeAnimation(keyPath: "strokeColor")
         animation.keyTimes = (0 ... count).map { NSNumber(value: CFTimeInterval($0) / CFTimeInterval(count)) }
         animation.values = (0 ... count).map {
