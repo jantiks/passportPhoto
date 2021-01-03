@@ -58,40 +58,37 @@ class SelectCountryViewController: UIViewController, UITableViewDelegate, UITabl
         
         cell?.textLabel?.textColor = .white
         
-        
-
-            if let svc = storyboard?.instantiateViewController(withIdentifier: "selectDocType") as? DocTypeViewController {
-                svc.currentImage = selectedImage
-                
-                if indexPath.section == 0 {
-                    switch cell?.textLabel?.text {
-                    case "Custom Size":
-                        if let image = selectedImage {
-                            let cropController = Mantis.cropViewController(image: image)
-                            cropController.delegate = self
-                            
-                            present(cropController, animated: true)
-                        }
+        if let svc = storyboard?.instantiateViewController(withIdentifier: "selectDocType") as? DocTypeViewController {
+            svc.currentImage = selectedImage
+            
+            if indexPath.section == 0 {
+                switch cell?.textLabel?.text {
+                case "Custom Size":
+                    if let image = selectedImage {
+                        let cropController = Mantis.cropViewController(image: image)
+                        cropController.delegate = self
                         
-                        
-                    default:
-                        for i in 0..<aspecRatios.count {
-                            if aspecRatios[i].name.lowercased().contains(specified[indexPath.row].lowercased()) {
-                                svc.aspecRatios.append(aspecRatios[i])
-                            }
-                        }
+                        present(cropController, animated: true)
                     }
-                } else {
+                    
+                default:
                     for i in 0..<aspecRatios.count {
-                        if aspecRatios[i].name.lowercased().contains(countries[indexPath.row].lowercased()) {
+                        if aspecRatios[i].name.lowercased().contains(specified[indexPath.row].lowercased()) {
                             svc.aspecRatios.append(aspecRatios[i])
                         }
                     }
                 }
-                
-                
-                self.present(svc, animated: true)
+            } else {
+                for i in 0..<aspecRatios.count {
+                    if aspecRatios[i].name.lowercased().contains(countries[indexPath.row].lowercased()) {
+                        svc.aspecRatios.append(aspecRatios[i])
+                    }
+                }
             }
+            
+            
+            self.present(svc, animated: true)
+        }
         
         
         _ = Timer.scheduledTimer(withTimeInterval: 1, repeats: false) {

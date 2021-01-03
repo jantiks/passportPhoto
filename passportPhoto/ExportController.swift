@@ -31,8 +31,8 @@ class ExportController: UIViewController, UIPrintInteractionControllerDelegate, 
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        NotificationCenter.default.addObserver(self, selector: #selector(willResignActive), name: UIScene.willDeactivateNotification, object: nil)
-        
+//        NotificationCenter.default.addObserver(self, selector: #selector(willResignActive), name: UIScene.willDeactivateNotification, object: nil)
+//
         toolbarPickerView.isHidden = true
         
         pickerView.delegate = self
@@ -63,29 +63,134 @@ class ExportController: UIViewController, UIPrintInteractionControllerDelegate, 
     
     @IBAction func downloadTapped(_ sender: Any) {
         
-        guard let image = imageView.image else { return }
+        callAcForDownload()
         
-        UIImageWriteToSavedPhotosAlbum(image, self, #selector(image(_:didFinishSavingWithError:contextInfo:)), nil)
     }
     
     @IBAction func printTapped(_ sender: Any) {
         
-        callAc()
+        callAcForPrint()
     }
     
     @objc func doneTapped() {
         print("done")
         toolbarPickerView.isHidden = true
         acTitle = "Paper is \(paperType) : photo count is \(self.photoCount)"
-        callAc()
+        callAcForPrint()
     }
-    @objc func willResignActive() {
-        print("passed")
-        let spiner = SpinnerView(frame: CGRect(x: 0, y: 0, width: 80, height: 80))
-        self.view.addSubview(spiner)
-    }
+//    @objc func willResignActive() {
+//        print("passed")
+//        let spiner = SpinnerView(frame: CGRect(x: 0, y: 0, width: 80, height: 80))
+//        self.view.addSubview(spiner)
+//    }
+    func callAcForDownload() {
+        guard let img = imageView else { return }
+        
+        
+        
+        let ac = UIAlertController(title: acTitle, message: "Choose paper type and number of photos", preferredStyle: .alert)
+        let choosePaper = UIAlertAction(title: "Paper", style: .default) {
+            [weak ac, weak self] action in
+            guard let self = self else { return }
+            guard let ac = ac else { return }
+            
+            
+            let paperSheet = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
+            
+            
+            let a4 = UIAlertAction(title: "A4 8.3 x 11.7 in", style: .default) { action in
+                self.paperType = "A4"
+                let a2Width = 2480
+                let a2Height = 3505
+                
+                ac.title = "Paper is \(self.paperType) : photo count is \(self.photoCount)"
+                self.paperSize = CGSize(width: a2Width, height: a2Height)
+                self.present(ac, animated: true)
+            }
+            let a5 = UIAlertAction(title: "A5 5.8 x 8.3 in", style: .default) { action in
+                self.paperType = "A5"
+                let a2Width = 1746
+                let a2Height = 2480
+                
+                ac.title = "Paper is \(self.paperType) : photo count is \(self.photoCount)"
+                self.paperSize = CGSize(width: a2Width, height: a2Height)
+                self.present(ac, animated: true)
+            }
+            let a6 = UIAlertAction(title: "A6 4.1 x 5.8 in", style: .default) { action in
+                self.paperType = "A6"
+                let a2Width = 1239
+                let a2Height = 1746
+                
+                ac.title = "Paper is \(self.paperType) : photo count is \(self.photoCount)"
+                self.paperSize = CGSize(width: a2Width, height: a2Height)
+                self.present(ac, animated: true)
+            }
+            
+            
+            paperSheet.addAction(a4)
+            paperSheet.addAction(a5)
+            paperSheet.addAction(a6)
+            self.present(paperSheet, animated: true)
+        }
+        
+        //uipickerview
+        
+        let quantity = UIAlertAction(title: "Quantity", style: .default) {
+            [weak self] action in
+            guard let self = self else { return }
+            self.toolbarPickerView.isHidden = false
+            
+        }
+        
+        //print controller
+        let presentDownloadAc = UIAlertAction(title: "Download", style: .default){ [weak self] action in
+            guard let self = self else { return }
+            let loadView = UIView()
+            let label = UILabel(frame: CGRect(x: 30, y: 55, width: 70, height: 20))
+            label.text = "Loading"
+            label.textColor = .systemGray
+            
+            
+            loadView.frame = CGRect(x: (self.view.bounds.width / 2) - 60, y: (self.view.frame.height / 2) - 30, width: 120, height: 80)
+            loadView.backgroundColor = .white
+            loadView.layer.cornerRadius = 10
+            
+            let spiner = SpinnerView(frame: CGRect(x: 40, y: 10, width: 40, height: 40))
+            
+            loadView.addSubview(spiner)
+            loadView.addSubview(label)
+            self.view.addSubview(loadView)
+            
+            // download
+            
+            DispatchQueue.main.async {
+                [weak self] in
+                guard let self = self else { return }
+                
+                let changedImg = self.imageResize(croppingImageView: img, viewSize: self.paperSize)
+                UIImageWriteToSavedPhotosAlbum(changedImg, self, #selector(self.image(_:didFinishSavingWithError:contextInfo:)), nil)
+                
+                loadView.removeFromSuperview()
+                
+            }
+            
+            
+              
+              
+
+
+          }
+          
+          ac.addAction(choosePaper)
+          ac.addAction(quantity)
+          ac.addAction(presentDownloadAc)
+          present(ac, animated: true)
+
+
+      }
+      
     
-    func callAc() {
+    func callAcForPrint() {
         guard let img = imageView else { return }
         
         
@@ -215,6 +320,7 @@ class ExportController: UIViewController, UIPrintInteractionControllerDelegate, 
         let imageWidth: Double = sizeArr[0].width
         let imageHeight: Double = sizeArr[0].height
         let newView = UIView()
+        newView.backgroundColor = .white
         newView.frame.size = viewSize
         let columns: Int = Int(viewSize.width / ((CGFloat(imageWidth)) + 30))
         let rows: Int = Int(viewSize.height / ((CGFloat(imageHeight)) + 30))
@@ -252,7 +358,7 @@ class ExportController: UIViewController, UIPrintInteractionControllerDelegate, 
             let ac = UIAlertController(title: "Save error", message: error.localizedDescription, preferredStyle: .alert)
             ac.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
         } else {
-            let ac = UIAlertController(title: "Saved!", message: "Image has beed save to your photos", preferredStyle: .alert)
+            let ac = UIAlertController(title: "Saved!", message: "Image has beed saved to your photos", preferredStyle: .alert)
             ac.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
             present(ac, animated: true)
         }
