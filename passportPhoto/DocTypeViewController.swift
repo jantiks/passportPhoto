@@ -58,7 +58,8 @@ class DocTypeViewController: UIViewController, UITableViewDelegate, UITableViewD
             cropController.delegate = self
             
             present(cropController, animated: true)
-           
+            
+            
             
         }
         

@@ -69,6 +69,7 @@ class SelectCountryViewController: UIViewController, UITableViewDelegate, UITabl
                         cropController.delegate = self
                         
                         present(cropController, animated: true)
+                        
                     }
                     
                 default:
@@ -77,6 +78,7 @@ class SelectCountryViewController: UIViewController, UITableViewDelegate, UITabl
                             svc.aspecRatios.append(aspecRatios[i])
                         }
                     }
+                    self.present(svc, animated: true)
                 }
             } else {
                 for i in 0..<aspecRatios.count {
@@ -84,10 +86,11 @@ class SelectCountryViewController: UIViewController, UITableViewDelegate, UITabl
                         svc.aspecRatios.append(aspecRatios[i])
                     }
                 }
+                self.present(svc, animated: true)
             }
             
             
-            self.present(svc, animated: true)
+            
         }
         
         

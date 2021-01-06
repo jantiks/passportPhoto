@@ -73,16 +73,11 @@ class ExportController: UIViewController, UIPrintInteractionControllerDelegate, 
     }
     
     @objc func doneTapped() {
-        print("done")
         toolbarPickerView.isHidden = true
         acTitle = "Paper is \(paperType) : photo count is \(self.photoCount)"
         callAcForPrint()
     }
-//    @objc func willResignActive() {
-//        print("passed")
-//        let spiner = SpinnerView(frame: CGRect(x: 0, y: 0, width: 80, height: 80))
-//        self.view.addSubview(spiner)
-//    }
+
     func callAcForDownload() {
         guard let img = imageView else { return }
         
@@ -237,7 +232,8 @@ class ExportController: UIViewController, UIPrintInteractionControllerDelegate, 
             paperSheet.addAction(a4)
             paperSheet.addAction(a5)
             paperSheet.addAction(a6)
-            self.present(paperSheet, animated: true)
+//            paperSheet.view.addSubview(UIView())
+            self.present(paperSheet, animated: false)
         }
         
         //uipickerview
