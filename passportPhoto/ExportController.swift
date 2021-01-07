@@ -196,8 +196,11 @@ class ExportController: UIViewController, UIPrintInteractionControllerDelegate, 
             guard let self = self else { return }
             guard let ac = ac else { return }
 
-            
-            let paperSheet = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
+            var alertStyle = UIAlertController.Style.actionSheet
+            if UIDevice.current.userInterfaceIdiom == .pad {
+                alertStyle = UIAlertController.Style.alert
+            }
+            let paperSheet = UIAlertController(title: nil, message: nil, preferredStyle: alertStyle)
             
             
             let a4 = UIAlertAction(title: "A4 8.3 x 11.7 in", style: .default) { action in
